@@ -1,0 +1,107 @@
+﻿@model FoodModel
+
+<h1 class="h3">Food Edit</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form class="row g-3" asp-controller="Admin" asp-action="FoodEdit" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="hidden" name="FoodId" value="@Model.FoodId" />
+                    <div class="col-md-8 mb-3">
+                        <label asp-for="FoodName" class="form-label"></label>
+                        <input class="form-control" asp-for="FoodName">
+                        <span asp-validation-for="FoodName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="FoodPrice" class="form-label"></label>
+                        <input class="form-control" asp-for="FoodPrice">
+                        <span asp-validation-for="FoodPrice" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label asp-for="Url" class="form-label"></label>
+                        <input class="form-control" asp-for="Url">
+                        <span asp-validation-for="Url" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="FoodDescription" class="form-label"></label>
+                        <input class="form-control" asp-for="FoodDescription">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="FoodRecipe" class="form-label"></label>
+                        <input class="form-control" asp-for="FoodRecipe">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="FoodMaterial" class="form-label"></label>
+                        <input class="form-control" asp-for="FoodMaterial">
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="FoodImage" class="form-label me-5"></label>
+                        <div>
+                            <input type="hidden" asp-for="FoodImage">
+                            <img src="~/images/@Model.FoodImage" asp-for="FoodImage" width="80" />
+                            <input type="file" name="file" />
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FoodDate" class="form-label"></label>
+                        <input class="form-control" asp-for="FoodDate">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <button type="submit" class="btn btn-success">Yemek Güncelle</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @for (int i = 0; i < Model.SelectedCategories.Count; i++)
+                    {
+                        <input type="hidden" name="SelectedCategories[@i].CategoryId" value="@Model.SelectedCategories[i].CategoryId" />
+                        <input type="hidden" name="SelectedCategories[@i].CategoryName" value="@Model.SelectedCategories[i].CategoryName" />
+                    }
+
+                    @foreach (var item in (List<Category>)ViewBag.Categories)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="categoryIds"
+                                   value="@item.CategoryId"
+                                   id="category_@(item.CategoryId)" @(Model.SelectedCategories.Any(i => i.CategoryId == item.CategoryId) ? "checked" : " ")>
+                            <label class="form-check-label" for="category_@(item.CategoryId)">
+                                @item.CategoryName
+                            </label>
+                        </div>
+                    }
+                    <hr />
+
+                    <div class="form-check">
+                        <input asp-for="IsApproved" class="form-check-input" type="checkbox">
+                        <label asp-for="IsApproved" class="form-check-label"></label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="IsHome" class="form-check-input" type="checkbox">
+                        <label asp-for="IsHome" class="form-check-label"></label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="IsSlider" class="form-check-input" type="checkbox">
+                        <label asp-for="IsSlider" class="form-check-label"></label>
+                        <span asp-validation-for="IsSlider" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+

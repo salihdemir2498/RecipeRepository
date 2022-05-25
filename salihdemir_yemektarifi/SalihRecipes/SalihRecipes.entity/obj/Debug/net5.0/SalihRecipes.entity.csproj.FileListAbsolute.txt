@@ -1,0 +1,12 @@
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\bin\Debug\net5.0\SalihRecipes.entity.deps.json
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\bin\Debug\net5.0\SalihRecipes.entity.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\bin\Debug\net5.0\ref\SalihRecipes.entity.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\bin\Debug\net5.0\SalihRecipes.entity.pdb
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.AssemblyInfo.cs
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\ref\SalihRecipes.entity.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.pdb
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.entity\obj\Debug\net5.0\SalihRecipes.entity.csproj.AssemblyReference.cache

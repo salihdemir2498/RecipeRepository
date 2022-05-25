@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SalihRecipes.webui</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+
+    @await Html.PartialAsync("_navbar")
+
+    <main class="my-3">
+        <div class="container">
+            @if (TempData["message"] != null)
+            {
+                var message = JsonConvert.DeserializeObject<AlertMessage>(TempData["message"] as String);
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-@message.AlertType">
+                            @message.Message
+                        </div>
+                    </div>
+                </div>
+            }
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="py-5 bg-dark text-white text-center">
+        Salih Recipes | 2022
+    </footer>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

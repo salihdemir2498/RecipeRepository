@@ -1,0 +1,17 @@
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.business.deps.json
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.business.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\ref\SalihRecipes.business.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.business.pdb
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.data.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.entity.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.data.pdb
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\bin\Debug\net5.0\SalihRecipes.entity.pdb
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.AssemblyInfo.cs
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.csproj.CopyComplete
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\ref\SalihRecipes.business.dll
+C:\Users\user\Desktop\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.business\obj\Debug\net5.0\SalihRecipes.business.pdb

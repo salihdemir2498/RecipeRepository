@@ -1,0 +1,16 @@
+@model Category
+
+
+    <div class="col-md-3">
+        <a asp-controller="Food" asp-action="FoodList" asp-route-category="@Model.Url">
+            <div class="card">
+                <img src="~/images/@Model.CategoryImage" style="height:160px !important;" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.CategoryName</h5>
+                </div>
+            </div>
+
+        </a>
+
+       
+    </div>
