@@ -54,6 +54,18 @@ namespace SalihRecipes.data.Concrete.EfCore
             }           //Örneğin 25 değeri gelecek 
         }
 
+        public Food GetFoodDetails(string url)
+        {
+            using (var context = new SalihRecipesContext())
+            {
+                return context.Foods
+                               .Where(i => i.Url == url)
+                               .Include(i => i.FoodCategories)
+                               .ThenInclude(i => i.Category)
+                               .FirstOrDefault();
+            }
+        }
+
         public List<Food> GetFoodsByCategory(string name, int page, int pageSize)
         {
             using (var context = new SalihRecipesContext())

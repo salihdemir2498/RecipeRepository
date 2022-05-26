@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalihRecipes.business.Abstract;
+using SalihRecipes.entity;
 using SalihRecipes.webui.Models;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,25 @@ namespace SalihRecipes.webui.Controllers
             ViewBag.CategoryName = _categorydService.GetAll().Where(i => i.Url == category).Select(i => i.CategoryName).FirstOrDefault();
             return View(foodListViewmodel);
         }
-  
+
+        public IActionResult FoodDetails(string url)
+        {
+            if (url == null)
+            {
+                return NotFound();
+            }
+            Food food = _foodService.GetFoodDetails(url);
+
+            if (food == null)
+            {
+                return NotFound();
+            }
+            return View(new FoodDetailModel
+            {
+                Food = food,
+                Categories = food.FoodCategories.Select(i => i.Category).ToList()
+            });
+        }
+
     }
 }

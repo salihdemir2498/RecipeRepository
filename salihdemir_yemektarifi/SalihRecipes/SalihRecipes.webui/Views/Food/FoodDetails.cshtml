@@ -1,0 +1,36 @@
+﻿@model FoodDetailModel
+
+
+
+<div class="row g-0">
+    <div class="col-md-4">
+        <img src="~/images/@Model.Food.FoodImage" style="max-height:280px; max-width:420px; list-style-type:none" class="img-fluid">
+    </div>
+    <div class="col-md-8">
+
+        <h5 class="mb-3">@Model.Food.FoodName</h5> <hr />
+        
+        @foreach (var item in Model.Categories)
+        {
+            <a asp-controller="shop" asp-action="list" asp-route-category="@item.Url" class="btn btn-link p-0 mb-3">@item.CategoryName</a>
+
+        }
+
+
+    <div class="mb-3">
+        <h4 class="text-primary mb-3"><i class="fa-solid fa-turkish-lira-sign"></i>@Model.Food.FoodPrice</h4>
+        <button type="submit" class="btn btn-primary btn-lg">Add To Card</button>
+    </div>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 p-5">
+        <label>Malzemeler</label>
+        <div style="background-color: #F7F7F7">
+            <h4>@Html.Raw(Model.Food.FoodMaterial)</h4>
+
+        </div>
+        <p class="p-3">@Html.Raw(Model.Food.FoodRecipe)</p>
+    </div>
+</div>

@@ -114,5 +114,10 @@ namespace SalihRecipes.business.Concrete
         {
             _foodRepository.Create(entity,categoryIds);
         }
+
+        public Food GetFoodDetails(string url)
+        {
+            return _foodRepository.GetFoodDetails(url);
+        }
     }
 }

@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label asp-for="FoodRecipe" class="form-label"></label>
-                        <input class="form-control" asp-for="FoodRecipe">
+                        <textarea id="editor2" class="form-control" asp-for="FoodRecipe"></textarea>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label asp-for="FoodMaterial" class="form-label"></label>
@@ -105,5 +105,6 @@
     <script src="/modules/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor');
+        CKEDITOR.replace('editor2');
     </script>
 }
