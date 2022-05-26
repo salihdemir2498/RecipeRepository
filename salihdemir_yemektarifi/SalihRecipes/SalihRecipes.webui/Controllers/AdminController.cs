@@ -38,7 +38,7 @@ namespace SalihRecipes.webui.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
+        public IActionResult FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
         {
             if (ModelState.IsValid && categoryIds.Length > 0 && file != null)  //model de bütün kriterler uygunmu
             {
@@ -54,7 +54,7 @@ namespace SalihRecipes.webui.Controllers
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
-                        await file.CopyToAsync(stream);
+                         file.CopyTo(stream);
                     }
                 
                 var entity = new Food()
@@ -65,14 +65,15 @@ namespace SalihRecipes.webui.Controllers
                     FoodDescription = model.FoodDescription,
                     FoodMaterial=model.FoodMaterial,
                     FoodRecipe=model.FoodRecipe,
-                    FoodDate=model.FoodDate,
-                    FoodImage = model.FoodImage
+                    FoodImage = model.FoodImage,
+                    IsApproved = model.IsApproved,
+                    IsHome = model.IsHome
                 };
-                _foodService.Create(entity, categoryIds);
-
-            
+                if (_foodService.Create(entity))
+                {
                     CreateMessage("Kayıt Eklendi", "success");
                     return RedirectToAction("FoodList");
+                } 
 
             }
             //Eğer validationdan geçemediyse ve/veya kategori seçilmemişse
@@ -116,7 +117,6 @@ namespace SalihRecipes.webui.Controllers
                 Url = entity.Url,
                 FoodPrice = entity.FoodPrice,
                 FoodImage = entity.FoodImage,
-                FoodDate=entity.FoodDate,
                 FoodDescription = entity.FoodDescription,
                 FoodMaterial=entity.FoodMaterial,
                 FoodRecipe=entity.FoodRecipe,
@@ -145,7 +145,6 @@ namespace SalihRecipes.webui.Controllers
                 entity.Url = model.Url;
                 entity.FoodPrice = model.FoodPrice;
                 entity.FoodImage = model.FoodImage;
-                entity.FoodDate = model.FoodDate;
                 entity.FoodDescription = model.FoodDescription;
                 entity.FoodMaterial = model.FoodMaterial;
                 entity.FoodRecipe = model.FoodRecipe;
@@ -159,7 +158,7 @@ namespace SalihRecipes.webui.Controllers
                     var extention = Path.GetExtension(file.FileName);
                     var randomName = string.Format($"{Guid.NewGuid()}{extention}");
                     entity.FoodImage = randomName;      //shopapp.webui
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", randomName); //resim nereye kaydediliyo
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", randomName); //resim nereye kaydediliyo
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
@@ -177,6 +176,27 @@ namespace SalihRecipes.webui.Controllers
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
+
+        public IActionResult DeleteFood(int foodId)
+        {
+            var entity = _foodService.GetById(foodId);
+
+            if (entity != null)
+            {
+                _foodService.Delete(entity);
+            }
+
+            var msg = new AlertMessage()
+            {
+                Message = $"{entity.FoodName} isimli ürün silindi.",
+                AlertType = "danger"
+            };
+
+            TempData["message"] = JsonConvert.SerializeObject(msg);
+
+            return RedirectToAction("FoodList");
+        }
+
 
         public IActionResult CategoryList()
         {

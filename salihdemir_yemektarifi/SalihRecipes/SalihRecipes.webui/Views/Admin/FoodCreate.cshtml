@@ -5,14 +5,14 @@
 <form class="row g-3" asp-controller="Admin" asp-action="FoodCreate" method="post" enctype="multipart/form-data">
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4 me-1">
             @*<div asp-validation-summary="All" class="text-danger"></div>*@
-            <div class="col-md-8">
+            <div class="col-md-12 mt-3">
                 <label asp-for="FoodName" class="form-label"></label>
                 <input class="form-control" asp-for="FoodName">
                 <span asp-validation-for="FoodName" class="text-danger"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <label asp-for="FoodPrice" class="form-label"></label>
                 <input class="form-control" asp-for="FoodPrice">
                 <span asp-validation-for="FoodPrice" class="text-danger"></span>
@@ -23,56 +23,74 @@
             </div>
             <div class="col-md-12">
                 <label asp-for="FoodRecipe" class="form-label"></label>
-                <input class="form-control" asp-for="FoodRecipe">
+                <textarea class="form-control" asp-for="FoodRecipe"></textarea>
             </div>
             <div class="col-md-12">
                 <label asp-for="FoodMaterial" class="form-label"></label>
-                <input class="form-control" asp-for="FoodMaterial">
+                <input id="editor" class="form-control" asp-for="FoodMaterial">
             </div>
             <div class="col-md-6">
                 <label asp-for="FoodImage" class="form-label"></label>
                 <input type="hidden" asp-for="FoodImage">
                 <input type="file" name="file" />
+                <div>
+                    <span class="text-danger">@ViewBag.ImageMessage</span>
+                </div>
             </div>
-            <div class="col-md-6">
-                <label asp-for="FoodDate" class="form-label"></label>
-                <input class="form-control" asp-for="FoodDate">
-            </div>
-            <div class="col-12">
+            <div class="col-12 mb-3 mt-3">
                 <button type="submit" class="btn btn-success">Yemek Ekle</button>
             </div>
         </div>
 
-        <div class="col-md-6">
-            @foreach (var item in (List<Category>)ViewBag.Categories)   //viewbag içinde obje olarak atıldığından böyle yazdık
-            {
+        <div class="col-md-7">
+            <div class="row">
+                @foreach (var item in (List<Category>)ViewBag.Categories)   //viewbag içinde obje olarak atıldığından böyle yazdık
+                {
 
+                    <div class="col-md-3">
+
+                        <div class="form-check">
+
+                            <input type="checkbox" class="form-check-input" value="@item.CategoryId" name="categoryIds" id="category_@(item.CategoryId)" />
+                            @try
+                            {
+                                if (Model != null)
+                                {
+                                    @(Model.SelectedCategories.Any(i => i.CategoryId == item.CategoryId) ? "checked" : "")
+                                }
+                            }
+                            catch (Exception)
+                            {  /*Burayı boş bıraktık çünkü hata yoksa yapmak istediğimiz özel birşey yok.Hata olmaması demek, create sayfasına */  }
+                            <label class="form-check-label">@item.CategoryName</label>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+                <span class="text-danger">@ViewBag.CategoryMessage</span>
+
+                <hr />
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" value="@item.CategoryId" name="categoryIds" id="category_@(item.CategoryId)" />
-                           @try 
-                           {
-                               if (Model != null) 
-                               { 
-                                   @(Model.SelectedCategories.Any(i => i.CategoryId == item.CategoryId) ? "checked" : "")  
-                               }
-                           }
-                           catch (Exception)
-                           {  /*Burayı boş bıraktık çünkü hata yoksa yapmak istediğimiz özel birşey yok.Hata olmaması demek, create sayfasına */  } 
-                    <label class="form-check-label">@item.CategoryName</label>
+                    <input type="checkbox" asp-for="IsApproved" class="form-check-input" />
+                    <label asp-for="IsApproved" class="form-check-label"></label>
                 </div>
-            }
-            <span class="text-danger">@ViewBag.CategoryMessage</span>
-
-            <hr />
-            <div class="form-check">
-                <input type="checkbox" asp-for="IsApproved" class="form-check-input" />
-                <label asp-for="IsApproved" class="form-check-label"></label>
+                <div class="form-check">
+                    <input type="checkbox" asp-for="IsHome" class="form-check-input" />
+                    <label asp-for="IsHome" class="form-check-label"></label>
+                </div>
             </div>
-            <div class="form-check">
-                <input type="checkbox" asp-for="IsHome" class="form-check-input" />
-                <label asp-for="IsHome" class="form-check-label"></label>
-            </div>
-        </div>
     </div>
 
 </form>
+
+
+@section scripts
+{
+    @*<script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="/modules/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+    </script>
+}

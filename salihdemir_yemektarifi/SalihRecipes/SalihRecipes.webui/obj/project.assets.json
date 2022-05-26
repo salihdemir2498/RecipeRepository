@@ -4521,11 +4521,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.webui\\SalihRecipes.webui.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.webui\\SalihRecipes.webui.csproj",
       "projectName": "SalihRecipes.webui",
-      "projectPath": "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.webui\\SalihRecipes.webui.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.webui\\SalihRecipes.webui.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.webui\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.webui\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -4548,11 +4548,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.business\\SalihRecipes.business.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.business\\SalihRecipes.business.csproj"
+            "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.business\\SalihRecipes.business.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.business\\SalihRecipes.business.csproj"
             },
-            "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.data\\SalihRecipes.data.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.data\\SalihRecipes.data.csproj"
+            "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.data\\SalihRecipes.data.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.data\\SalihRecipes.data.csproj"
             }
           }
         }

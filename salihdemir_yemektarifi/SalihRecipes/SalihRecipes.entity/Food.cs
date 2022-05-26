@@ -16,7 +16,6 @@ namespace SalihRecipes.entity
         public string FoodMaterial { get; set; }
         public string FoodRecipe { get; set; }
         public string FoodImage { get; set; }
-        public DateTime FoodDate { get; set; }
         public bool IsApproved { get; set; }
         public bool IsHome { get; set; }
         public bool IsSlider { get; set; }

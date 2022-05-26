@@ -99,7 +99,6 @@ namespace SalihRecipes.data.Concrete.EfCore
                 {
                     food.FoodName = entity.FoodName;
                     food.FoodPrice = entity.FoodPrice;
-                    food.FoodDate = entity.FoodDate;
                     food.FoodDescription = entity.FoodDescription;
                     food.FoodMaterial = entity.FoodMaterial;
                     food.FoodRecipe = entity.FoodRecipe;

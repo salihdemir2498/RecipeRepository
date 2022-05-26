@@ -42,9 +42,6 @@ namespace SalihRecipes.data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("FoodDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FoodDescription")
                         .HasColumnType("TEXT");
 

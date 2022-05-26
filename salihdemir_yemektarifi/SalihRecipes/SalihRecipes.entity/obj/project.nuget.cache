@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zMHA6cErWrY7ztleLmEw14cbXodXA8puzpdiRoYOy9klwfG4LaSTt7l+IxRnBHd5f5CStO186cwls3UP0RB9FQ==",
+  "dgSpecHash": "L8n4MgKg1I5FXWKPsZPjBhFi5P5MEqmtGZjuJ/IUA1+UoCFKgeCvnt9dJ1OkIBH7Ptc4ioJSyG9RdABaQjN+rQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.entity\\SalihRecipes.entity.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\RecipeRepository\\salihdemir_yemektarifi\\SalihRecipes\\SalihRecipes.entity\\SalihRecipes.entity.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
