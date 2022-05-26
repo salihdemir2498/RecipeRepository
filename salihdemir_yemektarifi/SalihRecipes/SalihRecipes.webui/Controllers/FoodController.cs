@@ -11,15 +11,18 @@ namespace SalihRecipes.webui.Controllers
     public class FoodController : Controller
     {
         private IFoodService _foodService;
-        public FoodController(IFoodService foodService)
+        private ICategoryService _categorydService;
+
+        public FoodController(IFoodService foodService, ICategoryService categorydService)
         {
             _foodService = foodService;
+            _categorydService = categorydService;
         }
 
         public IActionResult FoodList(string category, int page = 1)
         {
             const int pageSize = 2; //sayfadda kaç ürün gösterilecek
-            var productViewModel = new FoodListViewModel()
+            var foodListViewmodel = new FoodListViewModel()
             {
                 PageInfo = new PageInfo()
                 {
@@ -28,10 +31,11 @@ namespace SalihRecipes.webui.Controllers
                     ItemsPerPage = pageSize,
                     CurrentCategory = category
                 },
+               
                 Foods = _foodService.GetFoodsByCategory(category, page, pageSize),
             };
-
-            return View(productViewModel);
+            ViewBag.CategoryName = _categorydService.GetAll().Where(i => i.Url == category).Select(i => i.CategoryName).FirstOrDefault();
+            return View(foodListViewmodel);
         }
   
     }

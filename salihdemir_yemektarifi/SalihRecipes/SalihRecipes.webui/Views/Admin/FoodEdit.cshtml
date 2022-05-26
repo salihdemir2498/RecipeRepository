@@ -10,7 +10,7 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-8">
                     <input type="hidden" name="FoodId" value="@Model.FoodId" />
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label asp-for="FoodMaterial" class="form-label"></label>
-                        <input class="form-control" asp-for="FoodMaterial">
+                        <textarea id="editor" class="form-control" asp-for="FoodMaterial"></textarea>
                     </div>
                     <div class="col-md-6 mb-5">
                         <label asp-for="FoodImage" class="form-label me-5"></label>
@@ -48,7 +48,7 @@
                             <img src="~/images/@Model.FoodImage" asp-for="FoodImage" width="80" />
                             <input type="file" name="file" />
                         </div>
-                       
+
                     </div>
                     <div class="col-12 mb-3">
                         <button type="submit" class="btn btn-success">Yemek Güncelle</button>
@@ -95,9 +95,15 @@
 
                 </div>
             </div>
-           
+
         </form>
     </div>
 </div>
 
-
+@section scripts
+{
+    <script src="/modules/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+    </script>
+}

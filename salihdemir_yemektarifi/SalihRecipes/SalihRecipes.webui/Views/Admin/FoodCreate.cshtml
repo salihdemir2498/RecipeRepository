@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-12">
                 <label asp-for="FoodMaterial" class="form-label"></label>
-                <input id="editor" class="form-control" asp-for="FoodMaterial">
+                <textarea id="editor" class="form-control" asp-for="FoodMaterial"></textarea>
             </div>
             <div class="col-md-6">
                 <label asp-for="FoodImage" class="form-label"></label>
@@ -68,18 +68,18 @@
 
                 }
             </div>
-                <span class="text-danger">@ViewBag.CategoryMessage</span>
+            <span class="text-danger">@ViewBag.CategoryMessage</span>
 
-                <hr />
-                <div class="form-check">
-                    <input type="checkbox" asp-for="IsApproved" class="form-check-input" />
-                    <label asp-for="IsApproved" class="form-check-label"></label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" asp-for="IsHome" class="form-check-input" />
-                    <label asp-for="IsHome" class="form-check-label"></label>
-                </div>
+            <hr />
+            <div class="form-check">
+                <input type="checkbox" asp-for="IsApproved" class="form-check-input" />
+                <label asp-for="IsApproved" class="form-check-label"></label>
             </div>
+            <div class="form-check">
+                <input type="checkbox" asp-for="IsHome" class="form-check-input" />
+                <label asp-for="IsHome" class="form-check-label"></label>
+            </div>
+        </div>
     </div>
 
 </form>
@@ -87,8 +87,6 @@
 
 @section scripts
 {
-    @*<script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>*@
     <script src="/modules/ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('editor');
