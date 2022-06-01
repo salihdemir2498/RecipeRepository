@@ -9,42 +9,34 @@ body {
 }
 
 .nbr {
-    display:flex;
+    display: flex;
     background-color: #FFFFFF;
     /*max-width: 1000px;*/
-    max-height:200px !important;
+    max-height: 350px !important;
 }
 
-#nbr-ul {
+.nbr-ul {
     display: flex;
     width: 60% !important;
     margin-left: 0;
-    margin-right:200px;
-    /*max-width: 1000px;*/
-/*    justify-content: space-between;
-    text-align: center;*/
+    margin-right: 200px;
 }
 
-/*#nbr-li {
+
+
+.nbr-li a {
+    display: block;
+    text-decoration: none;
     padding: 1rem 2rem 1.15rem;
     text-transform: uppercase;
     cursor: pointer;
-    color: #ebebeb;
-}*/
+    color: black;
+    min-width: 40px;
+    margin: auto;
+    font-size: 16px;
+}
 
-    #nbr-li a {
-        display: block;
-        text-decoration: none;
-        padding: 1rem 2rem 1.15rem;
-        text-transform: uppercase;
-        cursor: pointer;
-        color: black;
-        min-width: 40px;
-        margin: auto;
-        font-size: 16px;
-    }
-
-    #nbr-li a:hover {
+    .nbr-li a:hover {
         background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
         background-size: 100% 100%;
         color: #27262c;
@@ -53,11 +45,18 @@ body {
         font-weight: bold;
     }
 
-    #nbr-li:active {
-        transform: translateY(4px);
-    }
 
-#nbr-ul-right {
+
+.nbr-li:active {
+    transform: translateY(4px);
+}
+
+.nbr-li:last-child {
+    display: none;
+}
+
+
+.nbr-ul-right {
     display: flex;
     width: 100%;
     margin-right: 0;
@@ -66,10 +65,10 @@ body {
     text-align: center;*/
 }
 
-#nbr-ul-right img{
-    height:25px;
-    width:30px;
-}
+    .nbr-ul-right img {
+        height: 25px;
+        width: 30px;
+    }
 
 /*#nbr-li {
     padding: 1rem 2rem 1.15rem;
@@ -78,7 +77,7 @@ body {
     color: #ebebeb;
 }*/
 
-#nbr-li-right a {
+.nbr-li-right a {
     display: block;
     text-decoration: none;
     padding: 1rem 2rem 1.15rem;
@@ -114,6 +113,44 @@ body {
     }
 }
 
-@keyframes 
+@media (max-width: 1210px) {
+    #abc {
+        display: none;
+    }
+}
 
+@media (max-width: 700px) {
+    .nbr{
+        display:block;
+    }
 
+    #abc {
+        display: block;
+        margin-left:20%;
+    }
+
+    .nbr-li {
+        display: none;
+    }
+
+        .nbr-li:last-child {
+            font-size: 26px;
+            display: block;
+        }
+
+    .responsivee .nbr-li {
+        display: block;
+        text-align: left;
+        margin: 1rem 0;
+    }
+
+        .responsivee .nbr-li:last-child {
+            position: absolute;
+            right: 10px;
+            top: 26px;
+        }
+
+    .responsivee .nbr-ul {
+        display: block;
+    }
+}

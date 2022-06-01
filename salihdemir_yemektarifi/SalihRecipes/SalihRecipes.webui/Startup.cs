@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ using SalihRecipes.business.Abstract;
 using SalihRecipes.business.Concrete;
 using SalihRecipes.data.Abstract;
 using SalihRecipes.data.Concrete.EfCore;
+using SalihRecipes.webui.EmailServices;
+using SalihRecipes.webui.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,10 +34,53 @@ namespace SalihRecipes.webui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationContext>(options => options.UseSqlite("Data Source=shopDb"));
-            //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();  
-                                                                                                                                   
-                                                                                                                                   
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlite("Data Source=FoodRecipe"));
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                //Password
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+
+                //Lockout
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                options.Lockout.AllowedForNewUsers = true;
+
+                //User
+                options.User.RequireUniqueEmail = true;
+
+                //SignIn
+                options.SignIn.RequireConfirmedEmail = true;
+
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/account/login";
+                options.LogoutPath = "/account/logout";
+                options.AccessDeniedPath = "/account/accessdenied";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                options.SlidingExpiration = true; //20 dakika içerisinde her iþlemde yeni bir 20 dk verir.
+                options.Cookie = new CookieBuilder()
+                {
+                    HttpOnly = true,
+                    Name = "MiniShopApp.Security.Cookie",
+                    SameSite = SameSiteMode.Strict
+                };
+            });
+
+            services.AddScoped<IEmailSender, SmtpEmailSender>(i => new SmtpEmailSender(
+                Configuration["EmailSender:Host"],
+                Configuration.GetValue<int>("EmailSender:Port"),
+                Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                Configuration["EmailSender:UserName"],
+                Configuration["EmailSender:Password"]
+                ));
+
             services.AddScoped<IFoodRepository, EfCoreFoodRepository>(); 
             services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
 
@@ -65,7 +112,7 @@ namespace SalihRecipes.webui
                     Path.Combine(Directory.GetCurrentDirectory(), "node_modules")),
                 RequestPath = "/modules"     //bootstrap için
             });
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

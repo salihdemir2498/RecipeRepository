@@ -1,9 +1,14 @@
 ﻿@model FoodListViewModel
-
+    
+    <style>
+        .allcategory:hover{
+            text-decoration:underline !important;
+        }
+    </style>
 
     <h3 class="d-flex">
-    <a href="/category/index" style="text-decoration:none;" class="text-dark me-3">Tüm Kategoriler </a><p class="text-muted me-3">  ----></p>  
-     <p style="text-decoration: underline; text-decoration-color: #E1C7B0" >@ViewBag.CategoryName</p>
+    <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">Tüm Kategoriler </a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span> 
+     <p style="font-size: 15px; color: #9B9B9B !important;" >@ViewBag.CategoryName</p>
     </h3>
 
 

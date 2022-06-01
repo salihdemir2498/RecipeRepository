@@ -8,14 +8,14 @@
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <td style="width: 30px;">Id</td>
-                    <td style="width: 100px;">Image</td>
+                    <td width="30">Id</td>
+                    <td width="100">Image</td>
                     <td>Name</td>
-                    <td style="width: 20px;">Price</td>
-                    <td style="width: 20px;">Anasayfa</td>
-                    <td style="width: 20px;">Onaylı</td>
-                    <td style="width: 20px;">Slider</td>
-                    <td style="width: 150px;"></td>
+                    <td width="20">Price</td>
+                    <td width="20">Anasayfa</td>
+                    <td width="20">Onaylı</td>
+                    <td width="20">Slider</td>
+                    <td width="150">Actions</td>
                 </tr>
             </thead>
             <tbody>
@@ -62,7 +62,7 @@
                     <td>
                         <a class="btn btn-primary btn-sm me-2" href="/admin/foods/@item.FoodId">Edit</a>
 
-                        <form action="/admin/deletefood" method="post" style="display:inline">
+                        <form action="/admin/deletefood" method="post" class="d-inline">
                             <input type="hidden" name="foodId" value="@item.FoodId" />
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>

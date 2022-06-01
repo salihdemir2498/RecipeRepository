@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SalihRecipes.business.Abstract;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.webui.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IFoodService _foodService;
