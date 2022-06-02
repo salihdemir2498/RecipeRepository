@@ -101,7 +101,7 @@ namespace SalihRecipes.webui.Controllers
                     token = code
                 });
                 //mail gönderme işlemleri
-                await _emailSender.SendEmailAsync(model.Email, "MiniShopApp Hesap Onaylama", $"Lütfen email hesabınızı onaylamak için <a href='https://localhost:5001{url}'>tıklayınız.</a>");
+                await _emailSender.SendEmailAsync(model.Email, "SalihRecipes Hesap Onaylama", $"Lütfen email hesabınızı onaylamak için <a href='https://localhost:5001{url}'>tıklayınız.</a>");
                 return RedirectToAction("Login", "Account");
             }
 
@@ -167,7 +167,7 @@ namespace SalihRecipes.webui.Controllers
             await _emailSender.SendEmailAsync(
 
                 email,
-                "MiniShopApp Reset Password",
+                "SalihRecipes Reset Password",
                 $"Parolanızı yeniden belirlemek için <a href='https://localhost:5001{url}'>tıklayınız.</a>"
                 );
             CreateMessage("Parola değiştirmek için gerekli link mail adresinize yollanmıştır.Lütfen kontrol ederek gerekli adımları takip ediniz!", "warning");

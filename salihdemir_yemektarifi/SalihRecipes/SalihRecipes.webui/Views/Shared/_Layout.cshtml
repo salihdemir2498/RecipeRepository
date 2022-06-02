@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SalihRecipes.webui</title>
 
-
+    <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="~/css/site.css" />
     <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/navbarrrr.css" rel="stylesheet" />
     <link href="~/css/headerrr.css" rel="stylesheet" />
 </head>
 <body>
 
-    @await Html.PartialAsync("_header")
+    @*@await Html.PartialAsync("_header")*@
     @await Html.PartialAsync("_navbar")
 
-    <main class="my-3">
+    <main role="main" class="my-3" style="margin-bottom:150px !important;">
         <div class="container">
             @if (TempData["message"] != null)
             {
@@ -39,12 +40,16 @@
         </div>
     </main>
 
-    <footer class="py-5 text-fixed bg-dark text-white text-center">
+    <footer class="py-5 text-fixed bg-dark text-white text-center" style="position: absolute; bottom: 0px; display: block; width: 100%; margin-top:60px;">
         Salih Recipes | 2022
     </footer>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

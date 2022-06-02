@@ -25,8 +25,7 @@
 
     </div>
 </div>-->
-
-    <div id="ab" class="nbr ">
+@*<div id="ab" class="nbr ">
         <ul class="nbr-ul">
             <li class="nbr-li"><a href="/">Anasayfa</a></li>
             <li class="nbr-li"><a href="/category/index">Kategoriler</a></li>
@@ -34,16 +33,14 @@
             <li class="nbr-li"><a href="/admin/categories">Admin Category</a></li>
             <li class="nbr-li"><a href="#" onclick="displayMenu()"><i class="fa-solid fa-bars fa-2x"></i></a></li>
         </ul>
-        <div id="abc" class="d-flex">
+        <div id="abc">
             <form class="d-flex w-25" style="width:280px !important; max-height:38px; margin-top:18px;">
                 <input class="form-control me-2" type="search" placeholder="Food Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <div class="userrr ms-4 mt-4">
-                <a href="#"><img src="~/images/user.png" alt="Alternate Text" /></a>
-            </div>
+
         </div>
-       
+
     </div>
 
 
@@ -52,6 +49,68 @@
             var link = document.getElementById("ab");
             link.classList.toggle("responsivee");
         }
-    </script>
+    </script>*@
 
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+    <section class="ftco-section">
+        <div class="wrap">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col">
+                        <p class="mb-0 phone"><span class="fa fa-phone"></span> <a href="#">+00 1234 567</a></p>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <div class="social-media">
+                            <p class="mb-0 d-flex">
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-facebook-f"><i class="sr-only">Facebook</i></span></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="~/">BEST <span>RECIPE</span></a>
+                <form action="#" class="searchform order-sm-start order-lg-last">
+                    <div class="form-group d-flex">
+                        <input type="text" class="form-control pl-3" placeholder="Search">
+                        <button type="submit" placeholder="" class="form-control search"><span class="fa fa-search"></span></button>
+                    </div>
+                </form>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item active"><a href="~/" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="/category/index" class="nav-link">Kategoriler</a></li>
+                        <li class="nav-item"><a href="/admin/foods" class="nav-link">Yemek Ekle</a></li>
+                        <li class="nav-item"><a href="/admin/categories" class="nav-link">Kategori Ekle</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- END nav -->
+
+    </section>
+
+
+
+</body>
+</html>
 

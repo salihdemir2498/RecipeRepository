@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SalihRecipes.business.Abstract;
 using SalihRecipes.business.Concrete;
 using SalihRecipes.entity;
+using SalihRecipes.webui.Identity;
 using SalihRecipes.webui.Models;
 using System;
 using System.Collections.Generic;
@@ -19,10 +21,14 @@ namespace SalihRecipes.webui.Controllers
     {
         private IFoodService _foodService;
         private ICategoryService _categoryService;
-        public AdminController(IFoodService foodService, ICategoryService categoryService)
+        private RoleManager<IdentityRole> _roleManager;
+        private UserManager<User> _userManager;
+        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _foodService = foodService;
             _categoryService = categoryService;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         public IActionResult FoodList()
         {
