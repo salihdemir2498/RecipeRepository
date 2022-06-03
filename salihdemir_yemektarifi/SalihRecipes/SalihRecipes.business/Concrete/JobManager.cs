@@ -8,11 +8,8 @@ namespace SalihRecipes.business.Concrete
 {
     public class JobManager
     {
-        public string MakeUrl(string url)
+        public static string MakeUrl(string url)
         {
-            //Bu metoda ilgili entitynin name'i yollanacak.
-            //url ise, bu name 'deki türkçe karakterler kaldırılıp,
-            //boşlukların yerine de - işareti konularak oluşturulacak.
             url = url.Replace("I", "i");
             url = url.Replace("ı", "i");
             url = url.Replace("İ", "i");
@@ -27,5 +24,6 @@ namespace SalihRecipes.business.Concrete
 
             return url;
         }
+
     }
 }

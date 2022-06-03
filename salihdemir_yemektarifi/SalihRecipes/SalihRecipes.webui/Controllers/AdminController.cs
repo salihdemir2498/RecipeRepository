@@ -164,17 +164,17 @@ namespace SalihRecipes.webui.Controllers
         [HttpPost]
         public IActionResult FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
         {
-            if (ModelState.IsValid && categoryIds.Length > 0 && file != null)  //model de bütün kriterler uygunmu
+            if (ModelState.IsValid && categoryIds.Length > 0 && file != null)  
             {
-                JobManager urlGenerate = new JobManager();
+                
 
-                var url = urlGenerate.MakeUrl(model.FoodName);
+                var url = JobManager.MakeUrl(model.FoodName);
 
                 model.FoodImage = file.FileName;  //veritabanına resim isminin eklenmesi
                     var extention = Path.GetExtension(file.FileName);
                     var randomName = string.Format($"{Guid.NewGuid()}{extention}");
                     model.FoodImage = randomName;      //shopapp.webui
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", randomName); //resim nereye kaydediliyo
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", randomName); 
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
@@ -192,15 +192,14 @@ namespace SalihRecipes.webui.Controllers
                     IsApproved = model.IsApproved,
                     IsHome = model.IsHome
                 };
-                if (_foodService.Create(entity))
-                {
-                    CreateMessage("Kayıt Eklendi", "success");
+                _foodService.Create(entity, categoryIds);
+                 CreateMessage("Kayıt Eklendi", "success");
                     return RedirectToAction("FoodList");
-                } 
+               
 
             }
             //Eğer validationdan geçemediyse ve/veya kategori seçilmemişse
-            ViewBag.Categories = _categoryService.GetAll();
+            
             if (categoryIds.Length > 0)
             {
                 model.SelectedCategories = categoryIds.Select(catid => new Category()
@@ -217,7 +216,8 @@ namespace SalihRecipes.webui.Controllers
             {
                 ViewBag.ImageMessage = "Lütfen resim seçiniz";
             }
-            return View(model);  //hata varsa aynı sayfaya geri gönderdik
+            ViewBag.Categories = _categoryService.GetAll();
+            return View(model);  
         }
 
         public IActionResult FoodEdit(int? id)
@@ -378,10 +378,93 @@ namespace SalihRecipes.webui.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult CategoryEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var entity = _categoryService.GetByIdWithProducts((int)id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            var model = new CategoryModel()
+            {
+                CategoryId = entity.CategoryId,
+                CategoryName = entity.CategoryName,
+                Url = entity.Url,
+                Foods = entity.FoodCategories.Select(p => p.Food).ToList()
+            };
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public IActionResult CategoryEdit(CategoryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var entity = _categoryService.GetById((int)model.CategoryId);
+
+                if (entity == null)
+                {
+                    return NotFound();
+                }
+
+                entity.CategoryName = model.CategoryName;
+                entity.Url = model.Url;
+
+                _categoryService.Update(entity);
+
+                var msg = new AlertMessage()
+                {
+                    Message = $"{entity.CategoryName} isimli category güncellendi.",
+                    AlertType = "success"
+                };
+
+                TempData["message"] = JsonConvert.SerializeObject(msg);
+
+                return RedirectToAction("CategoryList");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            var entity = _categoryService.GetById(categoryId);
+
+            if (entity != null)
+            {
+                _categoryService.Delete(entity);
+            }
+
+            var msg = new AlertMessage()
+            {
+                Message = $"{entity.CategoryName} isimli category silindi.",
+                AlertType = "danger"
+            };
+
+            TempData["message"] = JsonConvert.SerializeObject(msg);
+
+            return RedirectToAction("CategoryList");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFromCategory(int foodId, int categoryId)  //category ve product 'ın kesiştiği veriyi silicez
+        {
+            _categoryService.DeleteFromCategory(foodId, categoryId);
+            return Redirect("/admin/categories/" + categoryId);
+        }
 
 
 
-            private void CreateMessage(string message, string alerttype)
+
+        private void CreateMessage(string message, string alerttype)
             {
             var msg = new AlertMessage()
             {
@@ -390,7 +473,7 @@ namespace SalihRecipes.webui.Controllers
             };
 
             TempData["message"] = JsonConvert.SerializeObject(msg);
-            //{"Message" = "samsung isimli ürün eklendi." , "AlertType" = "Success"}
+
 
         }
     }

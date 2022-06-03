@@ -119,5 +119,10 @@ namespace SalihRecipes.business.Concrete
         {
             return _foodRepository.GetFoodDetails(url);
         }
+
+        public List<Food> GetSearchResult(string searchString)
+        {
+            return _foodRepository.GetSearchResult(searchString);
+        }
     }
 }

@@ -90,6 +90,45 @@ namespace SalihRecipes.data.Concrete.EfCore
                 return context.Foods.Where(i => i.IsApproved).ToList();
             }
         }
+
+        private string ConvertLower(string text)
+        {
+            //İstanbul Irak Üzgün Şelaler Satırarası
+            text = text.Replace("I", "i");//İstanbul irak Üzgün Şelaleler Satırarası
+            text = text.Replace("İ", "i");//istanbul irak Üzgün Şelaleler Satırarası
+            text = text.Replace("ı", "i");//istanbul irak Üzgün Şelaleler Satirarasi
+
+            text = text.ToLower();//istanbul irak üzgün şelaleler satirarasi
+            text = text.Replace("ç", "c");
+            text = text.Replace("ö", "o");
+            text = text.Replace("ü", "u");
+            text = text.Replace("ş", "s");
+            text = text.Replace("ğ", "g");
+            return text;
+        }
+
+        public List<Food> GetSearchResult(string searchString)
+        {
+            searchString = ConvertLower(searchString);
+
+            using (var context = new SalihRecipesContext())
+            {
+                var foods = context
+                    .Foods
+                    .Where(i => i.IsApproved).ToList();
+                foreach (var item in foods)
+                {
+                    item.FoodName = ConvertLower(item.FoodName);
+                    
+                }
+                var foods2 = foods
+                    .Where(i => i.FoodName == searchString)
+                    .ToList();
+
+                return foods2;
+            }
+        }
+
         public List<Food> GetSliderFoods()
         {
             using (var context = new SalihRecipesContext())

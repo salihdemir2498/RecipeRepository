@@ -58,5 +58,11 @@ namespace SalihRecipes.webui.Controllers
             });
         }
 
+        public IActionResult Search(string q)
+        {
+            
+            return View(_foodService.GetSearchResult(q));
+        }
+
     }
 }

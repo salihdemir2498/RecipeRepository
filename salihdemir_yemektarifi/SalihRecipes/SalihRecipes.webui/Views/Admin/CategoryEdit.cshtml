@@ -1,0 +1,116 @@
+﻿@model CategoryModel
+
+<h1 class="h3">Edit Category</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="CategoryEdit" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+            <div class="mb-3 row">
+                <label asp-for="CategoryName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="CategoryName">
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="Url" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="Url">
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save Category</button>
+                </div>
+            </div>
+
+            <div id="products">
+
+                @for (int i = 0; i < Model.Foods.Count; i++)
+                {
+                    <input type="hidden" name="Foods[@i].FoodId" value="@Model.Foods[i].FoodId" />
+                    <input type="hidden" name="Foods[@i].FoodImage" value="@Model.Foods[i].FoodImage" />
+                    <input type="hidden" name="Foods[@i].FoodName" value="@Model.Foods[i].FoodName" />
+                    <input type="hidden" name="Foods[@i].FoodPrice" value="@Model.Foods[i].FoodPrice" />
+                    <input type="hidden" name="Foods[@i].IsApproved" value="@Model.Foods[i].IsApproved.ToString()" />
+                }
+
+            </div>
+
+
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <table class="table table-bordered table-sm ">
+                    <thead>
+                        <tr>
+                            <td style="width: 30px;">Id</td>
+                            <td style="width: 100px;">Image</td>
+                            <td>Name</td>
+                            <td style="width: 20px;">Price</td>
+                            <td style="width: 20px;">Onaylı</td>
+                            <td style="width: 150px;"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if (Model.Foods.Count() > 0)
+                        {
+
+                            @foreach (var item in Model.Foods)
+                            {
+                                <tr>
+                                    <td>@item.FoodId</td>
+                                    <td><img src="~/images/@item.FoodImage" width="80" /></td>
+                                    <td>@item.FoodName</td>
+                                    <td>@item.FoodPrice</td>
+                                    <td>
+                                        @if (item.IsApproved)
+                                        {
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm me-2" href="/admin/foods/@item.FoodId">Edit</a>
+
+                                        <form action="/admin/deletefromcategory" method="post" style="display:inline">
+                                            <input type="hidden" name="foodId" value="@item.FoodId" />
+                                            <input type="hidden" name="categoryId" value="@Model.CategoryId" />
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <h3>No Productss</h3>
+                            </div>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}

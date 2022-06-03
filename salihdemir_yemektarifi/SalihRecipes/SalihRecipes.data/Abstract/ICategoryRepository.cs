@@ -9,6 +9,7 @@ namespace SalihRecipes.data.Abstract
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-
+        void DeleteFromCategory(int productId, int categoryId);
+        Category GetByIdWithProducts(int categoryId);
     }
 }

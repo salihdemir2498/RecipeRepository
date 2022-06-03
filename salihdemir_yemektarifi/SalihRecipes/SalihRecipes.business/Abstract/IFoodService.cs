@@ -22,6 +22,7 @@ namespace SalihRecipes.business.Abstract
         void Create(Food entity, int[] categoryIds);
         int GetCountByCategory(string category);
         Food GetFoodDetails(string url);
+        List<Food> GetSearchResult(string searchString);
 
     }
 }

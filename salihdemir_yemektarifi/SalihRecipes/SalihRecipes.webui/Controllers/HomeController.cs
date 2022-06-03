@@ -22,30 +22,17 @@ namespace SalihRecipes.webui.Controllers
         }
         public IActionResult Index()
         {
-            //FoodModel food = new FoodModel()
-            //{
-                
-            //};
-       
-          
+
                 var foodViewModel = new FoodListViewModel()
                 {
 
                     Foods = _foodService.GetSliderFoods()
                 };
-          
-        
-           
-                //var foodViewModel2 = new FoodListViewModel()
-                //{
-
-                //    Foods = _foodService.GetHomePageFoods()
-                //};
-          
-            
 
             return View(foodViewModel);
-            //return View();
+    
         }
+
+
     }
 }

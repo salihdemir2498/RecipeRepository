@@ -1,84 +1,107 @@
 ﻿@model FoodListViewModel
 
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="h3">Admin Foods</h1>
-        <hr />
-        <a class="btn btn-primary btn-sm" href="/admin/foods/create">Add Foods</a>
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <td width="30">Id</td>
-                    <td width="100">Image</td>
-                    <td>Name</td>
-                    <td width="20">Price</td>
-                    <td width="20">Anasayfa</td>
-                    <td width="20">Onaylı</td>
-                    <td width="20">Slider</td>
-                    <td width="150"></td>
-                </tr>
-            </thead>
-            <tbody>
-
-                @if (Model.Foods.Count() > 0)
+@section Css {
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#FoodList').DataTable(
                 {
-                    @foreach (var item in Model.Foods)
-                    {
-                <tr>
-                    <td>@item.FoodId</td>
-                    <td><img src="~/images/@item.FoodImage" width="80" height="80" /></td>
-                    <td>@item.FoodName</td>
-                    <td>@item.FoodPrice</td>
-                    <td>
-                        @if (item.IsHome)
-                        {
-                            <i class="fa-solid fa-circle-check text-success"></i>
-                        }
-                        else
-                        {
-                            <i class="fa-solid fa-circle-xmark text-danger"></i>
-                        }
-                    </td>
-                    <td>
-                        @if (item.IsApproved)
-                        {
-                            <i class="fa-solid fa-circle-check text-success"></i>
-                        }
-                        else
-                        {
-                            <i class="fa-solid fa-circle-xmark text-danger"></i>
-                        }
-                    </td>
-                    <td>
-                        @if (item.IsSlider)
-                        {
-                            <i class="fa-solid fa-circle-check text-success"></i>
-                        }
-                        else
-                        {
-                            <i class="fa-solid fa-circle-xmark text-danger"></i>
-                        }
-                    </td>
-                    <td>
-                        <a class="btn btn-primary btn-sm me-2" href="/admin/foods/@item.FoodId">Edit</a>
-
-                        <form action="/admin/deletefood" method="post" class="d-inline">
-                            <input type="hidden" name="foodId" value="@item.FoodId" />
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+                    lengthMenu: [
+                        [2, 5, 10, 20, 40, -1],
+                        [2, 5, 10, 20, 40, "Tümü"]
+                    ],
+                    language: {
+                        url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json"
                     }
                 }
-                else
-                {
-                    <div class="alert alert-warning">
-                        <h3>No Foods</h3>
-                    </div>
-                }
+            );
+        });
+    </script>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h3">Admin Foods</h1>
+            <hr />
+            <a class="btn btn-primary btn-sm mb-3" href="/admin/foods/create">Add Foods</a>
+            <table id="FoodList" class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <td width="30">Id</td>
+                        <td width="100">Image</td>
+                        <td>Name</td>
+                        <td width="20">Price</td>
+                        <td width="20">Anasayfa</td>
+                        <td width="20">Onaylı</td>
+                        <td width="20">Slider</td>
+                        <td width="150"></td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model.Foods.Count() > 0)
+                    {
+                        @foreach (var item in Model.Foods)
+                        {
+                            <tr>
+                                <td>@item.FoodId</td>
+                                <td><img src="~/images/@item.FoodImage" width="80" height="80" /></td>
+                                <td>@item.FoodName</td>
+                                <td>@item.FoodPrice</td>
+                                <td>
+                                    @if (item.IsHome)
+                                    {
+                                        <i class="fa-solid fa-circle-check text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.IsApproved)
+                                    {
+                                        <i class="fa-solid fa-circle-check text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.IsSlider)
+                                    {
+                                        <i class="fa-solid fa-circle-check text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm me-2" href="/admin/foods/@item.FoodId">Edit</a>
+
+                                    <form action="/admin/deletefood" method="post" class="d-inline">
+                                        <input type="hidden" name="foodId" value="@item.FoodId" />
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <h3>No Foods</h3>
+                        </div>
+                    }
 
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>

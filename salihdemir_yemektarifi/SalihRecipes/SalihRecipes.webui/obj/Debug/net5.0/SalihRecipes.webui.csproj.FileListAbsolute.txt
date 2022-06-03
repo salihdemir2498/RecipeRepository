@@ -319,7 +319,6 @@ C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\Salih
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\SalihRecipes.webui.pdb
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\SalihRecipes.webui.genruntimeconfig.cache
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Food\FoodDetails.cshtml.g.cs
-C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Shared\_header.cshtml.g.cs
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -334,3 +333,8 @@ C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\Salih
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Admin\RoleList.cshtml.g.cs
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Admin\RoleCreate.cshtml.g.cs
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Admin\RoleEdit.cshtml.g.cs
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Shared\_footer.cshtml.g.cs
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Admin\CategoryEdit.cshtml.g.cs
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\System.IO.Pipelines.dll
