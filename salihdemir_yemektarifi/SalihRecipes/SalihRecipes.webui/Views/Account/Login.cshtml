@@ -1,36 +1,79 @@
-﻿@model LoginModel
-<h6 class="display-4">Login</h6>
-<hr />
-<form asp-controller="Account" asp-action="Login" method="post">
-    <div class="row">
-        <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
-        <div class="col-md-6">
-            <div asp-validation-summary="All" class="text-danger">
-                <div class="form-group row mb-2">
-                    <div class="col-sm-3">
-                        <label asp-for="UserName" class="col-form-label"></label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input asp-for="UserName" type="text" class="form-control" />
-                    </div>
-                </div>
+﻿@model RegisterModel
 
-                <div class="form-group row mb-2">
-                    <div class="col-sm-3">
-                        <label asp-for="Password" class="col-form-label"></label>
-                    </div>
-                    <div class="col-sm-9">
-                        <input asp-for="Password" class="form-control" />
-                    </div>
-                </div>
 
-                <div class="form-group row mb-2">
-                    <div class="col-sm-9 offset-sm-3">
-                        <button class="btn btn-primary">Login</button>
-                        <a href="/account/forgotpassword" class="btn btn-link">Forgot Password</a>
+@section Css
+{
+
+    <link href="~/css/login.css" rel="stylesheet" />
+
+}
+
+
+    <div class="login-wrap">
+        <input type="hidden" name="ReturnUrl" value="ReturnUrl" />
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            
+        <div class="login-form">
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label for="usernamee" class="label">UserName</label>
+                        <input name="usernamee" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <label for="passwordd" class="label">Password</label>
+                        <input name="passwordd" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <input id="check" type="checkbox" class="check" checked>
+                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign In">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="/account/forgotpassword">Forgot Password?</a>
                     </div>
                 </div>
-            </div>
+            </form>
+            <form asp-controller="Account" asp-action="Register" method="post">
+                @*<div asp-validation-summary="All" class="text-danger"></div>*@
+                <div class="sign-up-htm">
+                    <div class="group">
+                        <label asp-for="FirstName" class="label"></label>
+                        <input asp-for="FirstName" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <label asp-for="LastName" class="label"></label>
+                        <input asp-for="LastName"  class="input">
+                    </div>
+                    <div class="group">
+                        <label asp-for="UserName" class="label"></label>
+                        <input asp-for="UserName"  class="input">
+                    </div>
+                    <div class="group">
+                        <label asp-for="Email" class="label"></label>
+                        <input asp-for="Email" type="text" class="input">
+                    </div>
+                    <div class="group">
+                        <label asp-for="Password" class="label"></label>
+                        <input asp-for="Password" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <label asp-for="RePassword" class="label"></label>
+                        <input asp-for="RePassword" type="password" class="input" data-type="password">
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign Up">
+                    </div>
+
+                </div>
+            </form>>
         </div>
     </div>
-</form>
+
+
+

@@ -1,55 +1,4 @@
-﻿<!--<div class="navbar bg-danger navbar-dark navbar-expand-sm">
-    <div class="container">
-        <a href="/" class="navbar-brand">Salih Recipe</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="/category/index" class="nav-link">Kategoriler</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">Orders</a>
-                </li>
-
-                <li class="nav-item">
-                    <a asp-controller="admin" asp-action="foodlist" class="nav-link">Admin Foods</a>-->
-@*<a href="/admin/foods" class="nav-link">Admin Foods</a>*@
-<!--</li>
-                <li class="nav-item">
-                    <a href="/admin/categories" class="nav-link">Admin Categories</a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</div>-->
-@*<div id="ab" class="nbr ">
-        <ul class="nbr-ul">
-            <li class="nbr-li"><a href="/">Anasayfa</a></li>
-            <li class="nbr-li"><a href="/category/index">Kategoriler</a></li>
-            <li class="nbr-li"><a asp-controller="admin" asp-action="foodlist">Admin Foods</a></li>
-            <li class="nbr-li"><a href="/admin/categories">Admin Category</a></li>
-            <li class="nbr-li"><a href="#" onclick="displayMenu()"><i class="fa-solid fa-bars fa-2x"></i></a></li>
-        </ul>
-        <div id="abc">
-            <form class="d-flex w-25" style="width:280px !important; max-height:38px; margin-top:18px;">
-                <input class="form-control me-2" type="search" placeholder="Food Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-
-        </div>
-
-    </div>
-
-
-    <script>
-        function displayMenu() {
-            var link = document.getElementById("ab");
-            link.classList.toggle("responsivee");
-        }
-    </script>*@
+﻿
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -65,7 +14,7 @@
 <body>
     <section class="ftco-section">
         <div class="wrap">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row justify-content-between">
                     <div class="col">
                         <p class="mb-0 phone"><span class="fa fa-phone"></span> <a href="#">+00 1234 567</a></p>
@@ -74,11 +23,26 @@
                         <div class="social-media">
                             <p class="mb-0 d-flex">
                                 <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-facebook-f"><i class="sr-only">Facebook</i></span></a>
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
                             </p>
                         </div>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a href="/account/login" class="nav-link text-white">Login</a>
+                            <a href="/account/register" class="nav-link text-white">Register</a>
+
+
+                        }
+                        else
+                        {
+                            <a href="/account/manage" class="nav-link text-white">@User.Identity.Name </a>
+                            <a href="/account/logout" class="nav-link text-white">Logout</a>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -99,9 +63,16 @@
                     <ul class="navbar-nav m-auto">
                         <li class="nav-item active"><a href="~/" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="/category/index" class="nav-link">Kategoriler</a></li>
-                        <li class="nav-item"><a href="/admin/foods" class="nav-link">Yemek Ekle</a></li>
-                        <li class="nav-item"><a href="/admin/categories" class="nav-link">Kategori Ekle</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item"><a href="/admin/foods" class="nav-link">Yemek Ekle</a></li>
+                            <li class="nav-item"><a href="/admin/categories" class="nav-link">Kategori Ekle</a></li>
+                            <li class="nav-item"><a href="/admin/role/list" class="nav-link">Roles</a></li>
+
+                        }
                     </ul>
+                   
                 </div>
             </div>
         </nav>

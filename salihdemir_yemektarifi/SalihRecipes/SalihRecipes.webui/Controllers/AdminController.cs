@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.webui.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IFoodService _foodService;
@@ -29,6 +29,122 @@ namespace SalihRecipes.webui.Controllers
             _categoryService = categoryService;
             _roleManager = roleManager;
             _userManager = userManager;
+        }
+        //public IActionResult UserList()
+        //{
+        //    return View(_userManager.Users);
+        //}
+
+        //public async Task<IActionResult> UserEdit(string id)
+        //{
+        //    var user = await _userManager.FindByIdAsync(id);
+        //    if (user != null)
+        //    {
+        //        var selectedRoles = await _userManager.GetRolesAsync(user);
+        //        var roles = _roleManager.Roles.Select(i => i.Name);
+        //        ViewBag.Roles = roles;
+        //        return View(new UserDetailsModel()
+        //        {
+        //            UserId = user.Id,
+        //            FirstName = user.FirstName,
+        //            LastName = user.LastName,
+        //            UserName = user.UserName,
+        //            Email = user.Email,
+        //            EmailConfirmed = user.EmailConfirmed,
+        //            SelectedRoles = selectedRoles
+        //        });
+        //    }
+        //    return Redirect("~/admin/user/list");
+        //}
+
+        public IActionResult RoleList()
+        {
+            return View(_roleManager.Roles);
+        }
+
+        public IActionResult RoleCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoleCreate(RoleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _roleManager.CreateAsync(
+                    new IdentityRole(model.Name)
+                    );
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("RoleList");
+                }
+
+                //Geri kalan kısmına yarın devam edeceğiz.
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> RoleEdit(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            var members = new List<User>();
+            var nonMembers = new List<User>();
+
+            foreach (var user in _userManager.Users)
+            {
+                var list = await _userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+                list.Add(user);
+            }
+            var model = new RoleDetails()
+            {
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoleEdit(RoleEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var userId in model.IdsToAdd ?? new string[] { })
+                {
+                    var user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        var result = await _userManager.AddToRoleAsync(user, model.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error.Description);
+                            }
+                        }
+                    }
+                }
+
+                foreach (var userId in model.IdsToDelete ?? new string[] { })
+                {
+                    var user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error.Description);
+                            }
+                        }
+                    }
+                }
+            }
+            return Redirect("/admin/role/" + model.RoleId);
         }
         public IActionResult FoodList()
         {
@@ -70,7 +186,6 @@ namespace SalihRecipes.webui.Controllers
                     FoodName = model.FoodName,
                     FoodPrice = model.FoodPrice,
                     Url=url,
-                    FoodDescription = model.FoodDescription,
                     FoodMaterial=model.FoodMaterial,
                     FoodRecipe=model.FoodRecipe,
                     FoodImage = model.FoodImage,
@@ -125,7 +240,6 @@ namespace SalihRecipes.webui.Controllers
                 Url = entity.Url,
                 FoodPrice = entity.FoodPrice,
                 FoodImage = entity.FoodImage,
-                FoodDescription = entity.FoodDescription,
                 FoodMaterial=entity.FoodMaterial,
                 FoodRecipe=entity.FoodRecipe,
                 IsApproved = entity.IsApproved,
@@ -153,7 +267,6 @@ namespace SalihRecipes.webui.Controllers
                 entity.Url = model.Url;
                 entity.FoodPrice = model.FoodPrice;
                 entity.FoodImage = model.FoodImage;
-                entity.FoodDescription = model.FoodDescription;
                 entity.FoodMaterial = model.FoodMaterial;
                 entity.FoodRecipe = model.FoodRecipe;
                 entity.IsApproved = model.IsApproved;

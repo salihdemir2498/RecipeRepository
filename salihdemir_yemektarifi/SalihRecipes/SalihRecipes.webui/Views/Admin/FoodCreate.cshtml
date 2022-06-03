@@ -18,16 +18,16 @@
                 <span asp-validation-for="FoodPrice" class="text-danger"></span>
             </div>
             <div class="col-md-12">
-                <label asp-for="FoodDescription" class="form-label"></label>
-                <input class="form-control" asp-for="FoodDescription">
-            </div>
-            <div class="col-md-12">
                 <label asp-for="FoodRecipe" class="form-label"></label>
-                <textarea class="form-control" asp-for="FoodRecipe"></textarea>
+                <textarea id="editor2" class="form-control" asp-for="FoodRecipe"></textarea>
+                <span asp-validation-for="FoodRecipe" class="text-danger"></span>
+
             </div>
             <div class="col-md-12">
                 <label asp-for="FoodMaterial" class="form-label"></label>
                 <textarea id="editor" class="form-control" asp-for="FoodMaterial"></textarea>
+                <span asp-validation-for="FoodMaterial" class="text-danger"></span>
+
             </div>
             <div class="col-md-6">
                 <label asp-for="FoodImage" class="form-label"></label>
@@ -91,4 +91,9 @@
     <script>
         CKEDITOR.replace('editor');
     </script>
+    <script>
+        CKEDITOR.replace('editor2');
+    </script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

@@ -12,7 +12,7 @@ namespace SalihRecipes.entity
         public string FoodName { get; set; }
         public string Url { get; set; }
         public double? FoodPrice { get; set; }
-        public string FoodDescription { get; set; }
+        //public string FoodDescription { get; set; }
         public string FoodMaterial { get; set; }
         public string FoodRecipe { get; set; }
         public string FoodImage { get; set; }

@@ -68,7 +68,7 @@ namespace SalihRecipes.webui
                 options.Cookie = new CookieBuilder()
                 {
                     HttpOnly = true,
-                    Name = "MiniShopApp.Security.Cookie",
+                    Name = "SalihRecipes.Security.Cookie",
                     SameSite = SameSiteMode.Strict
                 };
             });
@@ -119,6 +119,24 @@ namespace SalihRecipes.webui
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                   name: "adminrolelist",
+                   pattern: "admin/role/list",
+                   defaults: new { controller = "Admin", action = "RoleList" }
+                   );
+
+                endpoints.MapControllerRoute(
+                   name: "adminroleedit",
+                   pattern: "admin/role/{id}",
+                   defaults: new { controller = "Admin", action = "RoleEdit" }
+                   );
+
+                endpoints.MapControllerRoute(
+                    name: "adminrolecreate",
+                    pattern: "admin/role/create",
+                    defaults: new { controller = "Admin", action = "RoleCreate" }
+                    );
+
                 endpoints.MapControllerRoute(
                    name: "adminfoods",
                    pattern: "admin/foods",

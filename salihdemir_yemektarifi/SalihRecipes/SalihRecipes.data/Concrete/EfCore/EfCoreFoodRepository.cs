@@ -87,7 +87,7 @@ namespace SalihRecipes.data.Concrete.EfCore
         {
             using (var context = new SalihRecipesContext())
             {
-                return context.Foods.Where(i => i.IsApproved && i.IsHome).ToList();
+                return context.Foods.Where(i => i.IsApproved).ToList();
             }
         }
         public List<Food> GetSliderFoods()
@@ -111,7 +111,6 @@ namespace SalihRecipes.data.Concrete.EfCore
                 {
                     food.FoodName = entity.FoodName;
                     food.FoodPrice = entity.FoodPrice;
-                    food.FoodDescription = entity.FoodDescription;
                     food.FoodMaterial = entity.FoodMaterial;
                     food.FoodRecipe = entity.FoodRecipe;
                     food.Url = entity.Url;

@@ -23,48 +23,47 @@ namespace SalihRecipes.webui.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
         }
-        
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Login(string ReturnUrl = null)
+        public IActionResult Login(RegisterModel model=null)
         {
-            return View(
-                   new LoginModel()
-                   {
-                       ReturnUrl = ReturnUrl
-                   }
-                );
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(string usernamee,string passwordd,string ReturnUrl)
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrEmpty(usernamee) && string.IsNullOrEmpty(passwordd))
             {
-                return View(model);
+                return View(usernamee,passwordd);
             }
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByNameAsync(usernamee);
             if (user == null)
             {
                 ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı!");
-                return View(model);
+                return View(usernamee, passwordd);
             }
 
             if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 ModelState.AddModelError("", "Hesabınız onaylı değil! Lütfen mail adresinizi kontrol ederek, onay işlemlerini kontrol ediniz");
-                return View(model);
+                return View(usernamee, passwordd);
             }
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
+            var result = await _signInManager.PasswordSignInAsync(user, passwordd, true, false);
             if (result.Succeeded)
             {
-                return Redirect(model.ReturnUrl ?? "~/");
+                return Redirect(ReturnUrl ?? "~/");
             }
             ModelState.AddModelError("", "Kullanıcı adı veya parola hatalı!");
-            return View(model);
+            return View(usernamee, passwordd);
         }
 
         public IActionResult Register()
