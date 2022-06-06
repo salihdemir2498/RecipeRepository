@@ -338,3 +338,4 @@ C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\Salih
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\System.IO.Pipelines.dll
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Contact\Index.cshtml.g.cs
