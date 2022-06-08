@@ -13,7 +13,7 @@ namespace SalihRecipes.data.Concrete.EfCore
         public DbSet<Food> Foods { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<FoodCategory> FoodCategories { get; set; }
-
+        public DbSet<Contact> Contacts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

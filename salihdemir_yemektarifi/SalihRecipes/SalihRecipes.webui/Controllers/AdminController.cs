@@ -23,12 +23,14 @@ namespace SalihRecipes.webui.Controllers
         private ICategoryService _categoryService;
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
-        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        private IContactService _contactService;
+        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IContactService contactService)
         {
             _foodService = foodService;
             _categoryService = categoryService;
             _roleManager = roleManager;
             _userManager = userManager;
+            _contactService = contactService;
         }
         //public IActionResult UserList()
         //{
@@ -460,6 +462,22 @@ namespace SalihRecipes.webui.Controllers
             _categoryService.DeleteFromCategory(foodId, categoryId);
             return Redirect("/admin/categories/" + categoryId);
         }
+
+        
+
+        public IActionResult InboxPage()
+        {
+            return View(new ContactListViewModel()
+            {
+                Contacts = _contactService.GetAll()
+            });
+      
+        }
+
+        //public IActionResult InboxPageDetails()
+        //{
+
+        //}
 
 
 

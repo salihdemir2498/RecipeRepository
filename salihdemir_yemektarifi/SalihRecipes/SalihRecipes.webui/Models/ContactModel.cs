@@ -7,9 +7,13 @@ namespace SalihRecipes.webui.Models
 {
     public class ContactModel
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Subject { get; set; }
-        public string Message { get; set; }
+        public int ContactId { get; set; }
+        public string ContactUserName { get; set; }
+        public string ContactMail { get; set; }
+        public string ContactSubject { get; set; }
+        public string ContactMessage { get; set; }
+        public DateTime ContactDate { get; set; }
+        public bool ContactStatus { get; set; }
+
     }
 }
