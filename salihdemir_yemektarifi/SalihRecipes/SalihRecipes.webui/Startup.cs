@@ -123,6 +123,12 @@ namespace SalihRecipes.webui
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                  name: "admininboxlist",
+                  pattern: "admin/inbox/list",
+                  defaults: new { controller = "Admin", action = "InboxPage" }
+                  );
+
+                endpoints.MapControllerRoute(
                    name: "adminrolelist",
                    pattern: "admin/role/list",
                    defaults: new { controller = "Admin", action = "RoleList" }

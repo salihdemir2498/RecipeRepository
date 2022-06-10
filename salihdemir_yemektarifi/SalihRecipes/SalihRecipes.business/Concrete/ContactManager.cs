@@ -25,5 +25,10 @@ namespace SalihRecipes.business.Concrete
         {
            return _contactRepository.GetAll();
         }
+
+        public Contact GetContactDetails(int id)
+        {
+            return _contactRepository.GetContactDetails(id);
+        }
     }
 }

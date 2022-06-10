@@ -9,6 +9,6 @@ namespace SalihRecipes.data.Abstract
 {
     public interface IContactRepository : IRepository<Contact>
     {
-
+        Contact GetContactDetails(int id);
     }
 }

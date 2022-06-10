@@ -1,4 +1,6 @@
-﻿
+﻿@model ContactDetailModel
+
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="">
@@ -7,7 +9,7 @@
             <div class="card">
                 <div class="card-body bg-primary text-white mailbox-widget pb-0">
                     <h2 class="text-white pb-3">Your Mailbox</h2>
-                    <ul class="nav nav-tabs custom-tab border-bottom-0 mt-4" id="myTab" role="tablist">
+                    @*<ul class="nav nav-tabs custom-tab border-bottom-0 mt-4" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="inbox-tab" data-toggle="tab" aria-controls="inbox" href="#inbox" role="tab" aria-selected="true">
                                 <span class="d-block d-md-none"><i class="ti-email"></i></span>
@@ -20,12 +22,31 @@
                                 <span class="d-none d-md-block">DELETED</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul>*@
                 </div>
-          
-                    @await Html.PartialAsync("_inbox")  
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex">
+                            <label class=" text-danger">From Who:</label>
+                            <label class="">@Model.Contact.ContactUserName</label>
+                        </div>
+                        <div class="d-flex">
+                            <label class="text-danger">Subject:</label>
+                            <label class="">@Model.Contact.ContactSubject</label>
+                        </div>
+                        <div class="d-flex">
+                            <label class="text-danger">Post date:</label>
+                            <label class="">@Model.Contact.ContactDate.ToString("dd MMM yyyy")</label>
+                        </div>
+               
+                        <br />
+                   
+                        <h5 class="text-danger">Message:</h5>
+                        <h5 class="mb-3">@Model.Contact.ContactMessage</h5>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-

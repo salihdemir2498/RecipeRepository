@@ -8,38 +8,41 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="~/css/style.css">
+    @*<link rel="stylesheet" href="~/css/style.css">*@
+    <link href="~/css/style1.css" rel="stylesheet" />
 </head>
+
 
 <body>
     <section>
-        <div class="wrap">
+        <div class="wrap" style="height:40px">
             <div class="container-fluid">
                 <div class="row justify-content-between">
-                    <div class="col">
-                        <p class="mb-0 phone"><span class="fa fa-phone"></span> <a href="#">+00 1234 567</a></p>
+                    <div class="col d-flex">
+                        <p class="mb-0 phone mt-1"><span class="fa fa-phone"></span> <a href="#">+00 1234 567</a></p>
+                        
                     </div>
                     <div class="col d-flex justify-content-end">
-                        <div class="social-media">
-                            <p class="mb-0 d-flex">
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-facebook-f"><i class="sr-only">Facebook</i></span></a>
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-twitter"><i class="sr-only">Twitter</i></span></a>
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa-brands fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
-                            </p>
-                        </div>
+                       
 
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <a href="/account/login" class="nav-link text-white">Login</a>
-                            <a href="/account/register" class="nav-link text-white">Register</a>
+                    <div>
+                        <a href="/account/login" class="nav-link text-white">Login</a>
+                        <a href="/account/register" class="nav-link text-white">Register</a>
+                    </div>
+
 
 
                         }
                         else
                         {
-                            <a href="/account/manage" class="nav-link text-white">@User.Identity.Name </a>
-                            <a href="/account/logout" class="nav-link text-white">Logout</a>
+                    <div class="d-flex">
+                        <a href="/account/manage" class="nav-link text-white">@User.Identity.Name </a>
+                        <a href="/account/logout" class="nav-link text-white">Logout</a>
+                        <a href="/admin/inbox/list" class="nav-link text-white"><i class="fa-solid fa-envelope fa-2x"></i></a>
+                    </div>
+
                         }
 
 

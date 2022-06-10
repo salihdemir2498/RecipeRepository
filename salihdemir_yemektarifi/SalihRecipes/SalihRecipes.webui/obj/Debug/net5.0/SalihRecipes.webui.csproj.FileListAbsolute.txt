@@ -340,3 +340,5 @@ C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\Salih
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\bin\Debug\net5.0\System.IO.Pipelines.dll
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Admin\InboxPage.cshtml.g.cs
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Shared\_inbox.cshtml.g.cs
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Admin\InboxPageDetails.cshtml.g.cs

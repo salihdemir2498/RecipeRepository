@@ -7928,13 +7928,24 @@ button.bg-dark:focus {
 .text-center {
   text-align: center !important; }
 
+@media (min-width: 300px)
+{
+    .social-media {
+        display: none !important;
+    }
+}
+
 @media (min-width: 576px) {
   .text-sm-left {
     text-align: left !important; }
   .text-sm-right {
     text-align: right !important; }
   .text-sm-center {
-    text-align: center !important; } }
+    text-align: center !important; }
+    .social-media {
+        display: none !important;
+    }
+}
 
 @media (min-width: 768px) {
   .text-md-left {

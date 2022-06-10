@@ -478,7 +478,24 @@ namespace SalihRecipes.webui.Controllers
         //{
 
         //}
+        public IActionResult InboxPageDetails(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+            Contact contact = _contactService.GetContactDetails(id);
 
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            return View(new ContactDetailModel
+            {
+                Contact = contact    
+            });
+            
+        }
 
 
 

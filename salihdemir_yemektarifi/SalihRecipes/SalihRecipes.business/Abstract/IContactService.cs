@@ -11,5 +11,6 @@ namespace SalihRecipes.business.Abstract
     {
         void ContactAdd(Contact contact);
         List<Contact> GetAll();
+        Contact GetContactDetails(int id);
     }
 }
