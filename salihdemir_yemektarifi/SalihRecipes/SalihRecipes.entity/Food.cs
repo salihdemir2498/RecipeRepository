@@ -20,5 +20,6 @@ namespace SalihRecipes.entity
         public bool IsHome { get; set; }
         public bool IsSlider { get; set; }
         public List<FoodCategory> FoodCategories { get; set; }
+        public List<AuthorFoods> AuthorFoods { get; set; }
     }
 }

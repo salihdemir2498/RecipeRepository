@@ -13,11 +13,13 @@ namespace SalihRecipes.webui.Controllers
     {
         private IFoodService _foodService;
         private ICategoryService _categorydService;
+        private IAuthorService _authorService;
 
-        public FoodController(IFoodService foodService, ICategoryService categorydService)
+        public FoodController(IFoodService foodService, ICategoryService categorydService, IAuthorService authorService)
         {
             _foodService = foodService;
             _categorydService = categorydService;
+            _authorService = authorService;
         }
 
         public IActionResult FoodList(string category, int page = 1)
@@ -54,8 +56,10 @@ namespace SalihRecipes.webui.Controllers
             return View(new FoodDetailModel
             {
                 Food = food,
-                Categories = food.FoodCategories.Select(i => i.Category).ToList()
+                Categories = food.FoodCategories.Select(i => i.Category).ToList(),
+                Authors = food.AuthorFoods.Select(i=>i.Author).ToList()
             });
+           
         }
 
         public IActionResult Search(string q)

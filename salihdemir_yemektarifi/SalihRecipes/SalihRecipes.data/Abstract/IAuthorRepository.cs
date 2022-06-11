@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.data.Abstract
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IAuthorRepository : IRepository<Author>
     {
-        void DeleteFromCategory(int productId, int categoryId);
-        Category GetByIdWithFoods(int categoryId);
+        Author GetByIdWithFoods(int authorId);
+
     }
 }

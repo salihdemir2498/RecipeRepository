@@ -11521,9 +11521,9 @@ h1, h2, h3, h4, h5,
         font-weight: 500;
     }
 
-    .ftco-navbar-light .navbar-brand:hover, .ftco-navbar-light .navbar-brand:focus {
+    /*.ftco-navbar-light .navbar-brand:hover, .ftco-navbar-light .navbar-brand:focus {
         color: #000;
-    }
+    }*/
 
 @media (max-width: 767.98px) {
     .ftco-navbar-light .navbar-brand {

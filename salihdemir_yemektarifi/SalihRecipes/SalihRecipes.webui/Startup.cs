@@ -84,10 +84,12 @@ namespace SalihRecipes.webui
             services.AddScoped<IFoodRepository, EfCoreFoodRepository>(); 
             services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
             services.AddScoped<IContactRepository, EfCoreContactRepository>();
+            services.AddScoped<IAuthorRepository, EfCoreAuthorRepository>();
 
             services.AddScoped<IFoodService, FoodManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IContactService, ContactManager>();
+            services.AddScoped<IAuthorService, AuthorManager>();
 
             services.AddControllersWithViews();
           

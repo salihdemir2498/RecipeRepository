@@ -20,7 +20,7 @@ namespace SalihRecipes.data.Concrete.EfCore
             }
         }
 
-        public Category GetByIdWithProducts(int categoryId)
+        public Category GetByIdWithFoods(int categoryId)
         {
             using (var context = new SalihRecipesContext())
             {

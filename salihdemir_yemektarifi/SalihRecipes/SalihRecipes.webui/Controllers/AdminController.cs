@@ -388,7 +388,7 @@ namespace SalihRecipes.webui.Controllers
                 return NotFound();
             }
 
-            var entity = _categoryService.GetByIdWithProducts((int)id);
+            var entity = _categoryService.GetByIdWithFoods((int)id);
 
             if (entity == null)
             {

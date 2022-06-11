@@ -37,9 +37,9 @@ namespace SalihRecipes.business.Concrete
             return _categoryRepository.GetById(id);
         }
 
-        public Category GetByIdWithProducts(int categoryId)
+        public Category GetByIdWithFoods(int categoryId)
         {
-            return _categoryRepository.GetByIdWithProducts(categoryId);
+            return _categoryRepository.GetByIdWithFoods(categoryId);
         }
 
         public void Update(Category entity)

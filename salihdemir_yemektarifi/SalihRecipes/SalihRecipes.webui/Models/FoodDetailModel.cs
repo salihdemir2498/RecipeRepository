@@ -10,5 +10,6 @@ namespace SalihRecipes.webui.Models
     {
         public Food Food { get; set; }
         public List<Category> Categories { get; set; }
+        public List<Author> Authors { get; set; }
     }
 }
