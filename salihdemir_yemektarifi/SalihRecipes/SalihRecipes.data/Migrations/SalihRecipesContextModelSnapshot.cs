@@ -18,14 +18,16 @@ namespace SalihRecipes.data.Migrations
 
             modelBuilder.Entity("SalihRecipes.entity.Author", b =>
                 {
-                    b.Property<int>("AuthorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("AuthorAbout")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AuthorFullName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AuthorImage")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
@@ -41,8 +43,8 @@ namespace SalihRecipes.data.Migrations
 
             modelBuilder.Entity("SalihRecipes.entity.AuthorFoods", b =>
                 {
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("FoodId")
                         .HasColumnType("INTEGER");

@@ -34,8 +34,9 @@ namespace SalihRecipes.webui.Controllers
                     ItemsPerPage = pageSize,
                     CurrentCategory = category
                 },
-               
+
                 Foods = _foodService.GetFoodsByCategory(category, page, pageSize),
+                
             };
             ViewBag.CategoryName = _categorydService.GetAll().Where(i => i.Url == category).Select(i => i.CategoryName).FirstOrDefault();
             return View(foodListViewmodel);
@@ -48,6 +49,7 @@ namespace SalihRecipes.webui.Controllers
                 return NotFound();
             }
             Food food = _foodService.GetFoodDetails(url);
+            Food food2 = _foodService.GetFoodDetails2(url);
 
             if (food == null)
             {
@@ -57,7 +59,7 @@ namespace SalihRecipes.webui.Controllers
             {
                 Food = food,
                 Categories = food.FoodCategories.Select(i => i.Category).ToList(),
-                Authors = food.AuthorFoods.Select(i=>i.Author).ToList()
+                Authors = food2.AuthorFoods.Select(i=>i.Author).ToList()
             });
            
         }

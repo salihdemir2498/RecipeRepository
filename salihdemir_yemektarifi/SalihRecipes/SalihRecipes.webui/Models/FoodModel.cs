@@ -28,5 +28,6 @@ namespace SalihRecipes.webui.Models
         public bool IsHome { get; set; }
         public bool IsSlider { get; set; }
         public List<Category> SelectedCategories { get; set; }
+        public Author Author { get; set; }
     }
 }

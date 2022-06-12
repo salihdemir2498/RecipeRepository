@@ -110,14 +110,19 @@ namespace SalihRecipes.business.Concrete
             return _foodRepository.GetFoodsByCategory(name, page, pageSize);
         }
 
-        public void Create(Food entity, int[] categoryIds)
+        public void Create(Food entity, int[] categoryIds/*, string authorId*/)
         {
-            _foodRepository.Create(entity,categoryIds);
+            _foodRepository.Create(entity,categoryIds/*, authorId*/);
         }
 
         public Food GetFoodDetails(string url)
         {
             return _foodRepository.GetFoodDetails(url);
+        }
+
+        public Food GetFoodDetails2(string url)
+        {
+            return _foodRepository.GetFoodDetails2(url);
         }
 
         public List<Food> GetSearchResult(string searchString)

@@ -148,6 +148,7 @@ namespace SalihRecipes.webui.Controllers
             }
             return Redirect("/admin/role/" + model.RoleId);
         }
+        [AllowAnonymous]
         public IActionResult FoodList()
         {
             return View(new FoodListViewModel()
@@ -155,16 +156,17 @@ namespace SalihRecipes.webui.Controllers
                 Foods = _foodService.GetAll()
             });
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult FoodCreate()
         {
             ViewBag.Categories = _categoryService.GetAll();
+            //ViewBag.Authors = await _userManager.FindByNameAsync(model.AuthorFullName);
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
-        public IActionResult FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
+        public /*async*/ /*Task<*/IActionResult/*>*/ FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
         {
             if (ModelState.IsValid && categoryIds.Length > 0 && file != null)  
             {
@@ -194,7 +196,8 @@ namespace SalihRecipes.webui.Controllers
                     IsApproved = model.IsApproved,
                     IsHome = model.IsHome
                 };
-                _foodService.Create(entity, categoryIds);
+                //var user = await _userManager.FindByIdAsync(authorId);
+                _foodService.Create(entity, categoryIds/*,authorId*/);
                  CreateMessage("Kayıt Eklendi", "success");
                     return RedirectToAction("FoodList");
                

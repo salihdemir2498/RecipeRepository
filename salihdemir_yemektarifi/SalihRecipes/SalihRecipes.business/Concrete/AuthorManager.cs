@@ -26,7 +26,7 @@ namespace SalihRecipes.business.Concrete
             throw new NotImplementedException();
         }
 
-        public void DeleteFromAuthor(int foodId, int authorId)
+        public void DeleteFromAuthor(int foodId, string authorId)
         {
             throw new NotImplementedException();
         }
@@ -36,12 +36,12 @@ namespace SalihRecipes.business.Concrete
             return _authorRepository.GetAll();
         }
 
-        public Author GetById(int id)
+        public Author GetById(string id)
         {
             return _authorRepository.GetById(id);
         }
 
-        public Author GetByIdWithFoods(int authorId)
+        public Author GetByIdWithFoods(string authorId)
         {
             return _authorRepository.GetByIdWithFoods(authorId);
         }

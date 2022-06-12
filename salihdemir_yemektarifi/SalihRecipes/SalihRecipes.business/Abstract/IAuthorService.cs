@@ -9,12 +9,12 @@ namespace SalihRecipes.business.Abstract
 {
     public interface IAuthorService
     {
-        Author GetById(int id);
+        Author GetById(string id);
         List<Author> GetAll();
         void Create(Author entity);
         void Update(Author entity);
         void Delete(Author entity);
-        Author GetByIdWithFoods(int authorId);
-        void DeleteFromAuthor(int foodId, int authorId);
+        Author GetByIdWithFoods(string authorId);
+        void DeleteFromAuthor(int foodId, string authorId);
     }
 }

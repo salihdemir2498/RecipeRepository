@@ -3,7 +3,7 @@
 <h1 class="h3">Food Create</h1>
 
 <form class="row g-3" asp-controller="Admin" asp-action="FoodCreate" method="post" enctype="multipart/form-data">
-
+    <input type="hidden" name="authorName" value="" />
     <div class="row">
         <div class="col-md-4 me-1">
             @*<div asp-validation-summary="All" class="text-danger"></div>*@
@@ -37,6 +37,7 @@
                     <span class="text-danger">@ViewBag.ImageMessage</span>
                 </div>
             </div>
+            
             <div class="col-12 mb-3 mt-3">
                 <button type="submit" class="btn btn-success">Yemek Ekle</button>
             </div>
@@ -79,6 +80,8 @@
                 <input type="checkbox" asp-for="IsHome" class="form-check-input" />
                 <label asp-for="IsHome" class="form-check-label"></label>
             </div>
+            <hr />
+
         </div>
     </div>
 

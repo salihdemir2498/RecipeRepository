@@ -10,7 +10,7 @@ namespace SalihRecipes.entity
     {
         public int FoodId { get; set; }
         public Food Food { get; set; }
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
         public Author Author { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace SalihRecipes.data.Concrete.EfCore
 {
     public class EfCoreFoodRepository : EfCoreGenericRepository<Food, SalihRecipesContext> , IFoodRepository
     {
-        public void Create(Food entity, int[] categoryIds)
+        public void Create(Food entity, int[] categoryIds/*, string authorId*/)
         {
             using (var context = new SalihRecipesContext())
             {
@@ -23,6 +23,7 @@ namespace SalihRecipes.data.Concrete.EfCore
                     CategoryId = catId
                 }).ToList();
                 context.SaveChanges();
+                //authorId = entity.AuthorFoods.Where(i => i.AuthorId).FirstOrDefault();
             }
         }
 
@@ -62,6 +63,18 @@ namespace SalihRecipes.data.Concrete.EfCore
                                .Where(i => i.Url == url)
                                .Include(i => i.FoodCategories)
                                .ThenInclude(i => i.Category)
+                               .FirstOrDefault();
+            }
+        }
+
+        public Food GetFoodDetails2(string url)
+        {
+            using (var context = new SalihRecipesContext())
+            {
+                return context.Foods
+                               .Where(i => i.Url == url)
+                               .Include(i => i.AuthorFoods)
+                               .ThenInclude(i => i.Author)
                                .FirstOrDefault();
             }
         }
