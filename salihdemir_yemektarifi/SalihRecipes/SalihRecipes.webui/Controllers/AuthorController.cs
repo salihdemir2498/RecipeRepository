@@ -17,12 +17,12 @@ namespace SalihRecipes.webui.Controllers
             _authorService = authorService;
         }
 
-        public IActionResult AuthorList()
-        {
-            return View(new AuthorListViewModel()
-            {
-                Authors = _authorService.GetAll()
-            }); 
-        }
+        //public IActionResult AuthorList()
+        //{
+        //    return View(new AuthorListViewModel()
+        //    {
+        //        Authors = _authorService.GetAll()
+        //    }); 
+        //}
     }
 }

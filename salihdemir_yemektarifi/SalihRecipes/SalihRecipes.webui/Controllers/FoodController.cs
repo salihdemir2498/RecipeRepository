@@ -49,8 +49,8 @@ namespace SalihRecipes.webui.Controllers
                 return NotFound();
             }
             Food food = _foodService.GetFoodDetails(url);
-            Food food2 = _foodService.GetFoodDetails2(url);
-
+           Food food2 = _foodService.GetFoodDetails2(url);
+            int authorID = food2.AuthorFoods.Find(i => i.FoodId == food.FoodId).AuthorId;
             if (food == null)
             {
                 return NotFound();
@@ -59,8 +59,8 @@ namespace SalihRecipes.webui.Controllers
             {
                 Food = food,
                 Categories = food.FoodCategories.Select(i => i.Category).ToList(),
-                Authors = food2.AuthorFoods.Select(i=>i.Author).ToList()
-            });
+                Author = _authorService.GetById(authorID)
+            }) ;
            
         }
 

@@ -3,6 +3,7 @@ using SalihRecipes.data.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +42,13 @@ namespace SalihRecipes.data.Concrete.EfCore
             using (var context = new TContext())
             {
                 return context.Set<TEntity>().Find(id);
+            }
+        }
+        public TEntity GetSingle(Expression<Func<TEntity,bool>> filter)
+        {
+            using (var context=new TContext())
+            {
+                return context.Set<TEntity>().FirstOrDefault(filter);
             }
         }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,11 +20,12 @@ namespace SalihRecipes.business.Abstract
         List<Food> GetFoodsByCategory(string name, int page, int pageSize);
         Food GetByIdWithCategories(int id);
         bool Update(Food entity, int[] categoryIds);
-        void Create(Food entity, int[] categoryIds/*, string authorId*/);
+        void Create(Food entity, int[] categoryIds, int authorId);
         int GetCountByCategory(string category);
         Food GetFoodDetails(string url);
         Food GetFoodDetails2(string url);
         List<Food> GetSearchResult(string searchString);
+        public Food GetSingle(Expression<Func<Food, bool>> filter);
 
     }
 }

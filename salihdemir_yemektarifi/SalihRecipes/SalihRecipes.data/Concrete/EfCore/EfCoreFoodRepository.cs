@@ -11,19 +11,26 @@ namespace SalihRecipes.data.Concrete.EfCore
 {
     public class EfCoreFoodRepository : EfCoreGenericRepository<Food, SalihRecipesContext> , IFoodRepository
     {
-        public void Create(Food entity, int[] categoryIds/*, string authorId*/)
+        public void Create(Food entity, int[] categoryIds, int authorIds)
         {
             using (var context = new SalihRecipesContext())
             {
                 context.Foods.Add(entity);
                 context.SaveChanges();
+                List<AuthorFoods> authorFoods = new List<AuthorFoods>();
+                authorFoods.Add(new AuthorFoods()
+                {
+                    AuthorId = authorIds,
+                    FoodId = entity.FoodId
+                });
                 entity.FoodCategories = categoryIds.Select(catId => new FoodCategory()
                 {
                     FoodId = entity.FoodId,
                     CategoryId = catId
                 }).ToList();
+                entity.AuthorFoods = authorFoods;
                 context.SaveChanges();
-                //authorId = entity.AuthorFoods.Where(i => i.AuthorId).FirstOrDefault();
+             
             }
         }
 

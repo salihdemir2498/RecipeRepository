@@ -24,11 +24,10 @@
                     <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" class="btn btn-link p-0 mb-3"><span class="text-dark">Category Name: </span>@item.CategoryName</a>
 
                 }
-                @foreach (var item in Model.Authors)
-                {
-            <a asp-controller="Author" asp-action="AuthorList" asp-route-id="@item.AuthorId" class="btn btn-link p-0 mb-3"><span class="text-dark"><img src="~/images/author-icon-21.jpg" width="30" height="35" alt="Alternate Text" /></span>@item.AuthorFullName</a>
+              
+            <a asp-controller="Author" asp-action="AuthorList" asp-route-id="@Model.Author.AuthorId" class="btn btn-link p-0 mb-3"><span class="text-dark"><img src="~/images/author-icon-21.jpg" width="30" height="35" alt="Alternate Text" /></span>@Model.Author.AuthorFullName</a>
 
-                }
+                
             </div>
             
 

@@ -8,7 +8,7 @@ namespace SalihRecipes.entity
 {
     public class Author
     {
-        public string AuthorId { get; set; }
+        public int AuthorId { get; set; }
         public string AuthorFullName { get; set; }
         public string UserId { get; set; }
         public string AuthorAbout { get; set; }

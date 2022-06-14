@@ -24,14 +24,19 @@ namespace SalihRecipes.webui.Controllers
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
         private IContactService _contactService;
-        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IContactService contactService)
+        private IAuthorService _authorService;
+
+        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IContactService contactService, IAuthorService authorService)
         {
             _foodService = foodService;
             _categoryService = categoryService;
             _roleManager = roleManager;
             _userManager = userManager;
             _contactService = contactService;
+            _authorService = authorService;
         }
+
+
         //public IActionResult UserList()
         //{
         //    return View(_userManager.Users);
@@ -161,12 +166,12 @@ namespace SalihRecipes.webui.Controllers
         public IActionResult FoodCreate()
         {
             ViewBag.Categories = _categoryService.GetAll();
-            //ViewBag.Authors = await _userManager.FindByNameAsync(model.AuthorFullName);
+
             return View();
         }
         [AllowAnonymous]
         [HttpPost]
-        public /*async*/ /*Task<*/IActionResult/*>*/ FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
+        public IActionResult FoodCreate(FoodModel model,int[] categoryIds, IFormFile file)
         {
             if (ModelState.IsValid && categoryIds.Length > 0 && file != null)  
             {
@@ -196,8 +201,11 @@ namespace SalihRecipes.webui.Controllers
                     IsApproved = model.IsApproved,
                     IsHome = model.IsHome
                 };
-                //var user = await _userManager.FindByIdAsync(authorId);
-                _foodService.Create(entity, categoryIds/*,authorId*/);
+                string userId = _userManager.GetUserId(User);
+
+                var author= _authorService.GetSingle(i=>i.UserId==userId);
+                _foodService.Create(entity, categoryIds, author.AuthorId);
+
                  CreateMessage("Kayıt Eklendi", "success");
                     return RedirectToAction("FoodList");
                
@@ -224,7 +232,7 @@ namespace SalihRecipes.webui.Controllers
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);  
         }
-
+        [AllowAnonymous]
         public IActionResult FoodEdit(int? id)
         {
             if (id == null)
@@ -256,7 +264,7 @@ namespace SalihRecipes.webui.Controllers
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> FoodEdit(FoodModel model, int[] categoryIds, IFormFile file)
         {

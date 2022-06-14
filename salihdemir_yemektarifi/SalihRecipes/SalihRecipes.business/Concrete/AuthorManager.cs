@@ -4,6 +4,7 @@ using SalihRecipes.entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace SalihRecipes.business.Concrete
             throw new NotImplementedException();
         }
 
-        public void DeleteFromAuthor(int foodId, string authorId)
+        public void DeleteFromAuthor(int foodId, int authorId)
         {
             throw new NotImplementedException();
         }
@@ -36,14 +37,19 @@ namespace SalihRecipes.business.Concrete
             return _authorRepository.GetAll();
         }
 
-        public Author GetById(string id)
+        public Author GetById(int id)
         {
             return _authorRepository.GetById(id);
         }
 
-        public Author GetByIdWithFoods(string authorId)
+        public Author GetByIdWithFoods(int authorId)
         {
             return _authorRepository.GetByIdWithFoods(authorId);
+        }
+
+        public Author GetSingle(Expression<Func<Author, bool>> filter)
+        {
+            return _authorRepository.GetSingle(filter);
         }
 
         public void Update(Author entity)

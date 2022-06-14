@@ -9,7 +9,6 @@ namespace SalihRecipes.data.Abstract
 {
     public interface IAuthorRepository : IRepository<Author>
     {
-        Author GetByIdWithFoods(string authorId);
-        Author GetById(string id);
+        Author GetByIdWithFoods(int authorId);
     }
 }

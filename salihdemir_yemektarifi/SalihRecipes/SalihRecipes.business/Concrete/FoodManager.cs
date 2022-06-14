@@ -4,6 +4,7 @@ using SalihRecipes.entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -110,9 +111,9 @@ namespace SalihRecipes.business.Concrete
             return _foodRepository.GetFoodsByCategory(name, page, pageSize);
         }
 
-        public void Create(Food entity, int[] categoryIds/*, string authorId*/)
+        public void Create(Food entity, int[] categoryIds, int authorIds)
         {
-            _foodRepository.Create(entity,categoryIds/*, authorId*/);
+            _foodRepository.Create(entity,categoryIds, authorIds);
         }
 
         public Food GetFoodDetails(string url)
@@ -128,6 +129,11 @@ namespace SalihRecipes.business.Concrete
         public List<Food> GetSearchResult(string searchString)
         {
             return _foodRepository.GetSearchResult(searchString);
+        }
+
+        public Food GetSingle(Expression<Func<Food, bool>> filter)
+        {
+            return _foodRepository.GetSingle(filter);
         }
     }
 }
