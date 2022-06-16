@@ -40,7 +40,11 @@
                     <div class="d-flex">
                         <a href="/account/manage" class="nav-link text-white">@User.Identity.Name </a>
                         <a href="/account/logout" class="nav-link text-white">Logout</a>
-                        <a href="/admin/inbox/list" class="nav-link text-white"><i class="fa-solid fa-envelope fa-2x"></i></a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="/admin/inbox/list" class="nav-link text-white"><i class="fa-solid fa-envelope fa-2x"></i></a>
+
+                        }
                     </div>
 
                         }
@@ -67,7 +71,11 @@
                         <li class="nav-item active"><a href="~/" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="/category/index" class="nav-link">Kategoriler</a></li>
                         <li class="nav-item"><a asp-controller="contact" asp-action="Index" class="nav-link">İletişim</a></li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("User"))
+                        {
+                            <li class="nav-item"><a asp-controller="admin" asp-action="foodlist" class="nav-link">Yemek Ekle</a></li>
+                        }
+                        @if (User.IsInRole("Admin"))
                         {
                             <div class="collapse navbar-collapse" id="ftco-nav">
                                 <ul class="navbar-nav">
@@ -79,17 +87,16 @@
                                             <li><a class="dropdown-link nav-link text-dark" href="/admin/foods">Yemek Ekle</a></li>
                                             <li><a class="dropdown-link nav-link text-dark" href="/admin/categories">Kategori Ekle</a></li>
                                             <li><a class="dropdown-link nav-link text-dark" href="/admin/role/list">Roles</a></li>
+                                            <li><a class="dropdown-link nav-link text-dark" href="/admin/user/list">Users</a></li>
                                         </ul>
-                                    </li>   
+                                    </li>
                                 </ul>
-                                </div>
+                            </div>
 
-                                @*<li class="nav-item"></li>
-                <li class="nav-item"><a href="/admin/categories" class="nav-link">Kategori Ekle</a></li>
-                <li class="nav-item"><a href="/admin/role/list" class="nav-link">Roles</a></li>*@
 
-                                }
-                        </ul>
+
+                        }
+                    </ul>
 
                 </div>
             </div>

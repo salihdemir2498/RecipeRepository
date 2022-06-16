@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.webui.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class AccountController : Controller
     {
    

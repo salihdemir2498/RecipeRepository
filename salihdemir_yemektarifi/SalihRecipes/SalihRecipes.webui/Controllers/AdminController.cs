@@ -37,10 +37,10 @@ namespace SalihRecipes.webui.Controllers
         }
 
 
-        //public IActionResult UserList()
-        //{
-        //    return View(_userManager.Users);
-        //}
+        public IActionResult UserList()
+        {
+            return View(_userManager.Users);
+        }
 
         //public async Task<IActionResult> UserEdit(string id)
         //{
@@ -119,7 +119,7 @@ namespace SalihRecipes.webui.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach (var userId in model.IdsToAdd ?? new string[] { })
+                foreach (var userId in model.IdsToAdd ?? new string[] { }) //eger null sa boş bir array döndür
                 {
                     var user = await _userManager.FindByIdAsync(userId);
                     if (user != null)

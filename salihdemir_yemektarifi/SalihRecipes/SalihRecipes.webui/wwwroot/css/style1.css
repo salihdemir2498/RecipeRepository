@@ -1819,7 +1819,7 @@ pre {
     }
 }
 
-.table {
+/*.table {
     width: 100%;
     margin-bottom: 1rem;
     color: #212529;
@@ -2164,7 +2164,7 @@ pre {
 
     .table-responsive > .table-bordered {
         border: 0;
-    }
+    }*/
 
 .form-control {
     display: block;
