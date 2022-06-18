@@ -5,15 +5,10 @@
 <div class="row">
     <div class="col-md-12">
         <form class="row g-3" asp-controller="Admin" asp-action="FoodEdit" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-md-12">
-                    @*<div asp-validation-summary="All" class="text-danger"></div>*@
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-md-8">
-                    @*<input type="hidden" name="FoodId" value="@Model.FoodId" />*@
+             
                     <div class="col-md-8 mb-3">
                         <label asp-for="FoodName" class="form-label"></label>
                         <input class="form-control" asp-for="FoodName">
@@ -56,11 +51,6 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    @*@for (int i = 0; i < Model.SelectedCategories.Count; i++)
-                        {
-                            <input type="hidden" name="SelectedCategories[@i].CategoryId" value="@Model.SelectedCategories[i].CategoryId" />
-                            <input type="hidden" name="SelectedCategories[@i].CategoryName" value="@Model.SelectedCategories[i].CategoryName" />
-                        }*@
 
                     @foreach (var item in (List<Category>)ViewBag.Categories)
                     {

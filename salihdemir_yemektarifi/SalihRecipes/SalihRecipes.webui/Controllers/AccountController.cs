@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SalihRecipes.webui.EmailServices;
+using SalihRecipes.webui.Extensions;
 using SalihRecipes.webui.Identity;
 using SalihRecipes.webui.Models;
 using System;
@@ -42,29 +43,32 @@ namespace SalihRecipes.webui.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string usernamee,string passwordd,string ReturnUrl)
         {
-            if (string.IsNullOrEmpty(usernamee) && string.IsNullOrEmpty(passwordd))
-            {
-                return View(usernamee,passwordd);
-            }
-            var user = await _userManager.FindByNameAsync(usernamee);
-            if (user == null)
-            {
-                ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı!");
-                return View(usernamee, passwordd);
-            }
+     
+                if (string.IsNullOrEmpty(usernamee) && string.IsNullOrEmpty(passwordd))
+                {
+                ModelState.AddModelError("","Kullanıcı adı veya şifre yanlış");
+                    return View(usernamee, passwordd);
+                }
+                var user = await _userManager.FindByNameAsync(usernamee);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı!");
+                    return View(usernamee, passwordd);
+                }
 
-            if (!await _userManager.IsEmailConfirmedAsync(user))
-            {
-                ModelState.AddModelError("", "Hesabınız onaylı değil! Lütfen mail adresinizi kontrol ederek, onay işlemlerini kontrol ediniz");
+                if (!await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    ModelState.AddModelError("", "Hesabınız onaylı değil! Lütfen mail adresinizi kontrol ederek, onay işlemlerini kontrol ediniz");
+                    return View(usernamee, passwordd);
+                }
+                var result = await _signInManager.PasswordSignInAsync(user, passwordd, true, false);
+                if (result.Succeeded)
+                {
+                    return Redirect(ReturnUrl ?? "~/");
+                }
+                ModelState.AddModelError("", "Kullanıcı adı veya parola hatalı!");
                 return View(usernamee, passwordd);
-            }
-            var result = await _signInManager.PasswordSignInAsync(user, passwordd, true, false);
-            if (result.Succeeded)
-            {
-                return Redirect(ReturnUrl ?? "~/");
-            }
-            ModelState.AddModelError("", "Kullanıcı adı veya parola hatalı!");
-            return View(usernamee, passwordd);
+            
         }
 
         public IActionResult Register()
@@ -91,8 +95,8 @@ namespace SalihRecipes.webui.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)//Create işlemi başarılıysa
             {
-                //Mail onay işlemleri
-                //TOKEN işlemleri
+                //await _userManager.AddToRoleAsync(user,"customer"); //üyelik oluşturulduğu zaman kullanıcı varsayılan olarak bir customer rolüne ait yapmak istiyosak 
+
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                 var url = Url.Action("ConfirmEmail", "Account", new
@@ -134,6 +138,12 @@ namespace SalihRecipes.webui.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            TempData.Put("message", new AlertMessage()
+            {
+                Title = "Oturum Kapatıldı",
+                Message = "Hesabınız güvenli bir şekilde kapatıldı.",
+                AlertType = "warning"
+            });
             return Redirect("~/");
         }
 

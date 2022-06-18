@@ -11,45 +11,49 @@ namespace SalihRecipes.business.Concrete
 {
     public class CategoryManager : ICategoryService
     {
-        private ICategoryRepository _categoryRepository;
-        public CategoryManager(ICategoryRepository categoryRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryManager(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public void Create(Category entity)
         {
-            _categoryRepository.Create(entity);
+            _unitOfWork.Categories.Create(entity);
+            _unitOfWork.Save();
         }
 
         public void Delete(Category entity)
         {
-            _categoryRepository.Delete(entity);
+            _unitOfWork.Categories.Delete(entity);
+            _unitOfWork.Save();
         }
 
         public List<Category> GetAll()
         {
-            return _categoryRepository.GetAll();
+            return _unitOfWork.Categories.GetAll();
         }
 
         public Category GetById(int id)
         {
-            return _categoryRepository.GetById(id);
+            return _unitOfWork.Categories.GetById(id);
         }
 
         public Category GetByIdWithFoods(int categoryId)
         {
-            return _categoryRepository.GetByIdWithFoods(categoryId);
+            return _unitOfWork.Categories.GetByIdWithFoods(categoryId);
         }
 
         public void Update(Category entity)
         {
-            _categoryRepository.Update(entity);
+            _unitOfWork.Categories.Update(entity);
+            _unitOfWork.Save();
         }
 
         public void DeleteFromCategory(int foodId, int categoryId)
         {
-            _categoryRepository.DeleteFromCategory(foodId, categoryId);
+            _unitOfWork.Categories.DeleteFromCategory(foodId, categoryId);
+            _unitOfWork.Save();
         }
     }
 }

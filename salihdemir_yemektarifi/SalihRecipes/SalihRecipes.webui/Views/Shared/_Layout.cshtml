@@ -26,13 +26,16 @@
             @if (TempData["message"] != null)
             {
                 var message = JsonConvert.DeserializeObject<AlertMessage>(TempData["message"] as String);
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-@message.AlertType">
-                            @message.Message
-                        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-@message.AlertType alert-dismissible fade show" role="alert">
+                        <div>@message.Title</div>
+                        <div>@message.Message</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
+
+            </div>
             }
             @RenderBody()
         </div>

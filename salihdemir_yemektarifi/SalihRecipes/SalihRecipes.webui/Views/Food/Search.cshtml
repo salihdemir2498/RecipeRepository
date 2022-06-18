@@ -1,0 +1,12 @@
+﻿@model List<Food>
+
+    <h3>Arama Sonuçları</h3>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            @foreach (var food in Model)
+            {
+                <partial name="_food" model="food" />
+            }
+        </div>
+    </div>

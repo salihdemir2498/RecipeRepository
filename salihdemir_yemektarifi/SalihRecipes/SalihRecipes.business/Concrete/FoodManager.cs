@@ -12,10 +12,10 @@ namespace SalihRecipes.business.Concrete
 {
     public class FoodManager : IFoodService,IValidator<Food>
     {
-        private IFoodRepository _foodRepository;
-        public FoodManager(IFoodRepository foodRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public FoodManager(IUnitOfWork unitOfWork)
         {
-            _foodRepository = foodRepository;
+            _unitOfWork = unitOfWork;
         }
 
      
@@ -24,7 +24,8 @@ namespace SalihRecipes.business.Concrete
         {
             if (Validation(entity))
             {
-                _foodRepository.Create(entity);
+                _unitOfWork.Foods.Create(entity);
+                _unitOfWork.Save();
                 return true;
             }
             return false;
@@ -32,33 +33,35 @@ namespace SalihRecipes.business.Concrete
 
         public void Delete(Food entity)
         {
-            _foodRepository.Delete(entity);
+            _unitOfWork.Foods.Delete(entity);
+            _unitOfWork.Save();
         }
 
         public List<Food> GetAll()
         {
-            return _foodRepository.GetAll();
+            return _unitOfWork.Foods.GetAll();
         }
 
         public Food GetById(int id)
         {
-            return _foodRepository.GetById(id);
+            return _unitOfWork.Foods.GetById(id);
         }
 
         public List<Food> GetHomePageFoods()
         {
-            return _foodRepository.GetHomePageFoods();
+            return _unitOfWork.Foods.GetHomePageFoods();
         }
 
         public List<Food> GetSliderFoods()
         {
-            return _foodRepository.GetSliderFoods();
+            return _unitOfWork.Foods.GetSliderFoods();
 
         }
 
         public void Update(Food entity)
         {
-            _foodRepository.Update(entity);
+            _unitOfWork.Foods.Update(entity);
+            _unitOfWork.Save();
         }
 
         public string ErrorMessage { get; set; }
@@ -83,7 +86,7 @@ namespace SalihRecipes.business.Concrete
 
         public Food GetByIdWithCategories(int id)
         {
-            return _foodRepository.GetByIdWithCategories(id);
+            return _unitOfWork.Foods.GetByIdWithCategories(id);
         }
 
         public bool Update(Food entity, int[] categoryIds)
@@ -95,7 +98,8 @@ namespace SalihRecipes.business.Concrete
                     ErrorMessage += "En az 1 kategori seçmelisiniz.";
                     return false;
                 }
-                _foodRepository.Update(entity, categoryIds);
+                _unitOfWork.Foods.Update(entity, categoryIds);
+                _unitOfWork.Save();
                 return true;
             }
             return false;
@@ -103,37 +107,38 @@ namespace SalihRecipes.business.Concrete
 
         public int GetCountByCategory(string category)
         {
-            return _foodRepository.GetCountByCategory(category);
+            return _unitOfWork.Foods.GetCountByCategory(category);
         }
 
         public List<Food> GetFoodsByCategory(string name, int page, int pageSize)
         {
-            return _foodRepository.GetFoodsByCategory(name, page, pageSize);
+            return _unitOfWork.Foods.GetFoodsByCategory(name, page, pageSize);
         }
 
         public void Create(Food entity, int[] categoryIds, int authorIds)
         {
-            _foodRepository.Create(entity,categoryIds, authorIds);
+            _unitOfWork.Foods.Create(entity,categoryIds, authorIds);
+            _unitOfWork.Save();
         }
 
         public Food GetFoodDetails(string url)
         {
-            return _foodRepository.GetFoodDetails(url);
+            return _unitOfWork.Foods.GetFoodDetails(url);
         }
 
         public Food GetFoodDetails2(string url)
         {
-            return _foodRepository.GetFoodDetails2(url);
+            return _unitOfWork.Foods.GetFoodDetails2(url);
         }
 
         public List<Food> GetSearchResult(string searchString)
         {
-            return _foodRepository.GetSearchResult(searchString);
+            return _unitOfWork.Foods.GetSearchResult(searchString);
         }
 
         public Food GetSingle(Expression<Func<Food, bool>> filter)
         {
-            return _foodRepository.GetSingle(filter);
+            return _unitOfWork.Foods.GetSingle(filter);
         }
     }
 }

@@ -9,16 +9,23 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.data.Concrete.EfCore
 {
-    public class EfCoreContactRepository : EfCoreGenericRepository<Contact, SalihRecipesContext>, IContactRepository
+    public class EfCoreContactRepository : EfCoreGenericRepository<Contact>, IContactRepository
     {
+        public EfCoreContactRepository(SalihRecipesContext context) : base(context)
+        {
+
+        }
+        private SalihRecipesContext SalihRecipesContext
+        {
+            get { return context as SalihRecipesContext; }
+        }
         public Contact GetContactDetails(int id)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Contacts
+            
+                return SalihRecipesContext.Contacts
                                .Where(i => i.ContactId == id)
                                .FirstOrDefault();
-            }
+            
         }
     }
 }

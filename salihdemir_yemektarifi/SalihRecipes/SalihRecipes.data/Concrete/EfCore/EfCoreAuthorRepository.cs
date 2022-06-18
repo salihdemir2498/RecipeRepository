@@ -9,18 +9,25 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.data.Concrete.EfCore
 {
-    public class EfCoreAuthorRepository : EfCoreGenericRepository<Author, SalihRecipesContext>, IAuthorRepository
+    public class EfCoreAuthorRepository : EfCoreGenericRepository<Author>, IAuthorRepository
     {
+        public EfCoreAuthorRepository(SalihRecipesContext context) : base(context)
+        {
+
+        }
+        private SalihRecipesContext SalihRecipesContext
+        {
+            get { return context as SalihRecipesContext; }
+        }
         public Author GetByIdWithFoods(int authorId)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Authors
+            
+                return SalihRecipesContext.Authors
                               .Where(i => i.AuthorId == authorId)
                               .Include(i => i.AuthorFoods)
                               .ThenInclude(i => i.Food)
                               .FirstOrDefault();
-            }
+            
         }
     }
 }

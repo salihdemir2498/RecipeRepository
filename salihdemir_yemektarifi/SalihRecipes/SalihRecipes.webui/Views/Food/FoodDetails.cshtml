@@ -4,7 +4,7 @@
 {
 <h3 class="d-flex">
     <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">Tüm Kategoriler </a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span>
-    <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">@item.CategoryName</a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span> <p style="font-size: 15px; color: #9B9B9B !important;">@Model.Food.FoodName</p>
+    <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">@item.CategoryName</a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span> <p style="font-size: 15px; color: #9B9B9B !important;">@Model.Food.FoodName</p>
 </h3>
     }
    
@@ -25,7 +25,7 @@
 
                 }
               
-            <a asp-controller="Author" asp-action="AuthorList" asp-route-id="@Model.Author.AuthorId" class="btn btn-link p-0 mb-3"><span class="text-dark"><img src="~/images/author-icon-21.jpg" width="30" height="35" alt="Alternate Text" /></span>@Model.Author.AuthorFullName</a>
+            @*<a asp-controller="Author" asp-action="AuthorList" asp-route-id="@Model.Author.AuthorId" class="btn btn-link p-0 mb-3"><span class="text-dark"><img src="~/images/author-icon-21.jpg" width="30" height="35" alt="Alternate Text" /></span>@Model.Author.AuthorFullName</a>*@
 
                 
             </div>

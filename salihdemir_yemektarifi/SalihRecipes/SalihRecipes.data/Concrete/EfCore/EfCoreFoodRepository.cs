@@ -9,14 +9,22 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.data.Concrete.EfCore
 {
-    public class EfCoreFoodRepository : EfCoreGenericRepository<Food, SalihRecipesContext> , IFoodRepository
+    public class EfCoreFoodRepository : EfCoreGenericRepository<Food> , IFoodRepository
     {
+        public EfCoreFoodRepository(SalihRecipesContext context) : base(context)
+        {
+
+        }
+
+        private SalihRecipesContext SalihRecipesContext
+        {
+            get { return context as SalihRecipesContext; }
+        }
         public void Create(Food entity, int[] categoryIds, int authorIds)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                context.Foods.Add(entity);
-                context.SaveChanges();
+
+            SalihRecipesContext.Foods.Add(entity);
+            //SalihRecipesContext.SaveChanges();
                 List<AuthorFoods> authorFoods = new List<AuthorFoods>();
                 authorFoods.Add(new AuthorFoods()
                 {
@@ -29,27 +37,25 @@ namespace SalihRecipes.data.Concrete.EfCore
                     CategoryId = catId
                 }).ToList();
                 entity.AuthorFoods = authorFoods;
-                context.SaveChanges();
+            //SalihRecipesContext.SaveChanges();
              
-            }
+           
         }
 
         public Food GetByIdWithCategories(int id)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Foods.Where(i => i.FoodId == id)
+            
+                return SalihRecipesContext.Foods.Where(i => i.FoodId == id)
                                     .Include(i => i.FoodCategories)
                                     .ThenInclude(i => i.Category)
                                     .FirstOrDefault();
-            }
+           
         }
 
         public int GetCountByCategory(string category)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                var foods = context.Foods.Where(i => i.IsApproved).AsQueryable();
+    
+                var foods = SalihRecipesContext.Foods.Where(i => i.IsApproved).AsQueryable();
 
                 if (!string.IsNullOrEmpty(category))
                 {
@@ -59,38 +65,35 @@ namespace SalihRecipes.data.Concrete.EfCore
                                     .Where(i => i.FoodCategories.Any(a => a.Category.Url == category));
                 }
                 return foods.Count();
-            }           //Örneğin 25 değeri gelecek 
+                      //Örneğin 25 değeri gelecek 
         }
 
         public Food GetFoodDetails(string url)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Foods
+        
+                return SalihRecipesContext.Foods
                                .Where(i => i.Url == url)
                                .Include(i => i.FoodCategories)
                                .ThenInclude(i => i.Category)
                                .FirstOrDefault();
-            }
+            
         }
 
         public Food GetFoodDetails2(string url)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Foods
+            
+                return SalihRecipesContext.Foods
                                .Where(i => i.Url == url)
                                .Include(i => i.AuthorFoods)
                                .ThenInclude(i => i.Author)
                                .FirstOrDefault();
-            }
+            
         }
 
         public List<Food> GetFoodsByCategory(string name, int page, int pageSize)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                var foods = context.Foods.Where(i => i.IsApproved).AsQueryable(); //asqueryable biz sorguyu yazıyoruz ancak veritabanına göndermeden önce üzerine ekstradan bir linq sorgusu bir kriter eklemek
+          
+                var foods = SalihRecipesContext.Foods.Where(i => i.IsApproved).AsQueryable(); //asqueryable biz sorguyu yazıyoruz ancak veritabanına göndermeden önce üzerine ekstradan bir linq sorgusu bir kriter eklemek
                                                                                         //istiyorum
                 if (!string.IsNullOrEmpty(name))
                 {
@@ -100,15 +103,14 @@ namespace SalihRecipes.data.Concrete.EfCore
                                     .Where(i => i.FoodCategories.Any(a => a.Category.Url == name)); //ilgili food kategorilerinden herhangi birinin gönderdiğimiz name e eşit olup olmadığıyla ilgili
                 }
                 return foods.Skip((page - 1) * pageSize).Take(pageSize).ToList(); //example:3 sayfa var pagesize 6 => Skip(12).Take(6) 12 ürünü ötele 6 ürün al
-            }           //Skip(5) 5 ürün öteler ilk 5 ürünu öteler  
+                      //Skip(5) 5 ürün öteler ilk 5 ürünu öteler  
         }
 
         public List<Food> GetHomePageFoods()
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Foods.Where(i => i.IsApproved).ToList();
-            }
+        
+                return SalihRecipesContext.Foods.Where(i => i.IsApproved).ToList();
+            
         }
 
         private string ConvertLower(string text)
@@ -130,38 +132,30 @@ namespace SalihRecipes.data.Concrete.EfCore
         public List<Food> GetSearchResult(string searchString)
         {
             searchString = ConvertLower(searchString);
-
-            using (var context = new SalihRecipesContext())
-            {
-                var foods = context
-                    .Foods
-                    .Where(i => i.IsApproved).ToList();
+          
+                var foods = SalihRecipesContext.Foods
+                                       .Where(i => i.IsApproved).ToList();
                 foreach (var item in foods)
                 {
                     item.FoodName = ConvertLower(item.FoodName);
-                    
                 }
-                var foods2 = foods
-                    .Where(i => i.FoodName == searchString)
-                    .ToList();
-
+                var foods2 = foods.Where(i => i.FoodName == searchString).ToList();
                 return foods2;
-            }
+            
+            
         }
 
         public List<Food> GetSliderFoods()
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Foods.Where(i => i.IsApproved && i.IsHome && i.IsSlider).ToList();
-            }
+            
+                return SalihRecipesContext.Foods.Where(i => i.IsApproved && i.IsHome && i.IsSlider).ToList();
+            
         }
 
         public void Update(Food entity, int[] categoryIds)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                var food = context.Foods
+         
+                var food = SalihRecipesContext.Foods
                                      .Include(i => i.FoodCategories)
                                      .FirstOrDefault(i => i.FoodId == entity.FoodId); //burada bize bir product gel
       
@@ -184,9 +178,9 @@ namespace SalihRecipes.data.Concrete.EfCore
                         CategoryId = catid
                     }).ToList();
 
-                    context.SaveChanges();
+                //SalihRecipesContext.SaveChanges();
                 }
-            }
+            
         }
     }
 }

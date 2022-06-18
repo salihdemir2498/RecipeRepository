@@ -11,24 +11,25 @@ namespace SalihRecipes.business.Concrete
 {
     public class ContactManager : IContactService
     {
-        private IContactRepository _contactRepository;
-        public ContactManager(IContactRepository contactRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public ContactManager(IUnitOfWork unitOfWork)
         {
-            _contactRepository = contactRepository;
+            _unitOfWork = unitOfWork;
         }
         public void ContactAdd(Contact contact)
         {
-            _contactRepository.Create(contact);
+            _unitOfWork.Contacts.Create(contact);
+            _unitOfWork.Save();
         }
 
         public List<Contact> GetAll()
         {
-           return _contactRepository.GetAll();
+           return _unitOfWork.Contacts.GetAll();
         }
 
         public Contact GetContactDetails(int id)
         {
-            return _contactRepository.GetContactDetails(id);
+            return _unitOfWork.Contacts.GetContactDetails(id);
         }
     }
 }

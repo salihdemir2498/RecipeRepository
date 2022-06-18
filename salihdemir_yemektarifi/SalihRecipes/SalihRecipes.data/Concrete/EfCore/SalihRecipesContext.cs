@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SalihRecipes.data.Configurations;
 using SalihRecipes.entity;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,10 @@ namespace SalihRecipes.data.Concrete.EfCore
 {
     public class SalihRecipesContext : DbContext
     {
+        public SalihRecipesContext(DbContextOptions options) : base(options)
+        {
+
+        }
         public DbSet<Food> Foods { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<FoodCategory> FoodCategories { get; set; }
@@ -18,15 +23,19 @@ namespace SalihRecipes.data.Concrete.EfCore
         public DbSet<AuthorFoods> AuthorFoods { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=FoodRecipe");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlite("Data Source=FoodRecipe");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FoodCategory>()
-                .HasKey(c => new { c.CategoryId, c.FoodId });
+            modelBuilder.ApplyConfiguration(new FoodConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new FoodCategoryConfiguration());
+
+            modelBuilder.Seed();
+           
             modelBuilder.Entity<AuthorFoods>()
                 .HasKey(c => new { c.AuthorId, c.FoodId });
         }

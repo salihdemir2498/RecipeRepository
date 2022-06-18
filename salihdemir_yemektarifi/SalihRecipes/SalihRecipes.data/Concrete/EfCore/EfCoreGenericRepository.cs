@@ -9,56 +9,55 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.data.Concrete.EfCore
 {
-    public class EfCoreGenericRepository<TEntity, TContext> : IRepository<TEntity> where TEntity : class where TContext : DbContext, new()
+    public class EfCoreGenericRepository<TEntity> : IRepository<TEntity> where TEntity : class 
     {
+        protected readonly DbContext context;
+        public EfCoreGenericRepository(DbContext ctx)
+        {
+            context = ctx;
+        }
         public void Create(TEntity entity)
         {
-            using (var context = new TContext())
-            {
+       
                 context.Set<TEntity>().Add(entity);
-                context.SaveChanges();
-            }
+                //context.SaveChanges();
+            
         }
 
         public void Delete(TEntity entity)
         {
-            using (var context = new TContext())
-            {
+      
                 context.Set<TEntity>().Remove(entity);
-                context.SaveChanges();
-            }
+                //context.SaveChanges();
+            
         }
 
         public List<TEntity> GetAll()
         {
-            using (var context = new TContext())
-            {
+         
                 return context.Set<TEntity>().ToList();
-            }
+            
         }
 
         public TEntity GetById(int id)
         {
-            using (var context = new TContext())
-            {
+        
                 return context.Set<TEntity>().Find(id);
-            }
+            
         }
         public TEntity GetSingle(Expression<Func<TEntity,bool>> filter)
         {
-            using (var context=new TContext())
-            {
+           
                 return context.Set<TEntity>().FirstOrDefault(filter);
-            }
+            
         }
 
         public void Update(TEntity entity)
         {
-            using (var context = new TContext())
-            {
+        
                 context.Entry(entity).State = EntityState.Modified;
-                context.SaveChanges();
-            }
+                //context.SaveChanges();
+            
         }
     }
 }

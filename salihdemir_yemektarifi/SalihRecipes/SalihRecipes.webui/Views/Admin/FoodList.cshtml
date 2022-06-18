@@ -21,27 +21,28 @@
             );
         });
     </script>
-    }
+}
 
-    <div class="row">
-        <div class="col-md-12 m-auto">
-            <h1 class="h3">Admin Foods</h1>
-            <hr />
-            <a class="btn btn-primary btn-sm mb-3" href="/admin/foods/create">Add Foods</a>
-            <table id="FoodList" class="table table-bordered mt-3 w-100">
-                <thead>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h6 class="display-4">Admin Foods</h6>
+        <hr />
+        <a class="btn btn-primary btn-sm mb-3" href="/admin/foods/create">Add Foods</a>
+            <table id="FoodList" class="table table-bordered mt-3">
+                    <thead>
                     <tr>
-                        <td width="5%">Id</td>
-                        <td width="15%">Image</td>
-                        <td width="10%">Name</td>
-                        <td width="5%">Price</td>
-                        <td width="5%">Anasayfa</td>
-                        <td width="5%">Onaylı</td>
-                        <td width="5%">Slider</td>
-                        <td width="10%"></td>
+                        <td width="10">Id</td>
+                        <td width="25">Image</td>
+                        <td>Name</td>
+                        <td width="8">Anasayfa</td>
+                        <td width="8">Onaylı</td>
+                        <td width="8">Slider</td>
+                        <td width="120"></td>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
 
                     @if (Model.Foods.Count() > 0)
                     {
@@ -49,9 +50,8 @@
                         {
                             <tr>
                                 <td>@item.FoodId</td>
-                                <td><img src="~/images/@item.FoodImage" width="80" height="80" /></td>
+                                <td><img src="~/images/@item.FoodImage" style="width:100%; height:80px" /></td>
                                 <td>@item.FoodName</td>
-                                <td>@item.FoodPrice</td>
                                 <td>
                                     @if (item.IsHome)
                                     {
@@ -101,7 +101,8 @@
                     }
 
 
-                </tbody>
+                    </tbody>
             </table>
-        </div>
-    </div>
+     </div>
+</div>
+

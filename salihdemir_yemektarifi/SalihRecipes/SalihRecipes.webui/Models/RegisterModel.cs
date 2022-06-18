@@ -12,9 +12,9 @@ namespace SalihRecipes.webui.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage ="UserName alanı zorunludur")]
         public string UserName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Password alanı zorunludur")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]

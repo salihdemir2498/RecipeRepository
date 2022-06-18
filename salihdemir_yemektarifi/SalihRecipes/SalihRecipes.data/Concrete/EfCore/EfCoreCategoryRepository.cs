@@ -9,27 +9,33 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.data.Concrete.EfCore
 {
-    public class EfCoreCategoryRepository : EfCoreGenericRepository<Category, SalihRecipesContext>, ICategoryRepository
+    public class EfCoreCategoryRepository : EfCoreGenericRepository<Category>, ICategoryRepository
     {
+        public EfCoreCategoryRepository(SalihRecipesContext context) : base(context)
+        {
+
+        }
+        private SalihRecipesContext SalihRecipesContext
+        {
+            get { return context as SalihRecipesContext; }
+        }
         public void DeleteFromCategory(int foodId, int categoryId)
         {
-            using (var context = new SalihRecipesContext())
-            {
+           
                 var cmd = "delete from foodcategory where FoodId=@p0 and CategoryId=@p1";
-                context.Database.ExecuteSqlRaw(cmd, foodId, categoryId);
-            }
+            SalihRecipesContext.Database.ExecuteSqlRaw(cmd, foodId, categoryId);
+            
         }
 
         public Category GetByIdWithFoods(int categoryId)
         {
-            using (var context = new SalihRecipesContext())
-            {
-                return context.Categories
+            
+                return SalihRecipesContext.Categories
                               .Where(i => i.CategoryId == categoryId)
                               .Include(i => i.FoodCategories)
                               .ThenInclude(i => i.Food)
                               .FirstOrDefault();
-            }
+            
         }
     }
 }

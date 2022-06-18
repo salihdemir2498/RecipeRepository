@@ -34,7 +34,13 @@ namespace SalihRecipes.webui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlite("Data Source=FoodRecipe"));
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
+            services.AddDbContext<SalihRecipesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
+
+            //services.AddDbContext<ApplicationContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            //services.AddDbContext<SalihRecipesContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+
+
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
@@ -81,10 +87,11 @@ namespace SalihRecipes.webui
                 Configuration["EmailSender:Password"]
                 ));
 
-            services.AddScoped<IFoodRepository, EfCoreFoodRepository>(); 
-            services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
-            services.AddScoped<IContactRepository, EfCoreContactRepository>();
-            services.AddScoped<IAuthorRepository, EfCoreAuthorRepository>();
+            //services.AddScoped<IFoodRepository, EfCoreFoodRepository>(); 
+            //services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
+            //services.AddScoped<IContactRepository, EfCoreContactRepository>();
+            //services.AddScoped<IAuthorRepository, EfCoreAuthorRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IFoodService, FoodManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
@@ -96,7 +103,7 @@ namespace SalihRecipes.webui
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration,UserManager<User> userManager,RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -131,15 +138,15 @@ namespace SalihRecipes.webui
                   );
 
                 endpoints.MapControllerRoute(
-                   name: "adminuseredit",
-                   pattern: "admin/user/{id}",
-                   defaults: new { controller = "Admin", action = "UserEdit" }
-                   );
-
-                endpoints.MapControllerRoute(
                    name: "adminuserlist",
                    pattern: "admin/user/list",
                    defaults: new { controller = "Admin", action = "UserList" }
+                   );
+
+                endpoints.MapControllerRoute(
+                   name: "adminuseredit",
+                   pattern: "admin/user/{id}",
+                   defaults: new { controller = "Admin", action = "UserEdit" }
                    );
 
                 endpoints.MapControllerRoute(
@@ -201,17 +208,24 @@ namespace SalihRecipes.webui
                     pattern: "category/index/{id?}",
                     defaults: new { controller = "Category", action = "Index" }
                     );
+                endpoints.MapControllerRoute(
+                  name: "search",
+                  pattern: "food/search",
+                  defaults: new { controller = "Food", action = "Search" }
+                  );
 
                 endpoints.MapControllerRoute(
                     name: "foods",
                     pattern: "foods/{category?}",  //category eklemezsek direk products açýlýr category optional
                     defaults: new { controller = "Food", action = "foodlist" }
                     );
-
+               
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedIdentity.Seed(userManager,roleManager,configuration).Wait();
         }
     }
 }

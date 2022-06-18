@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalihRecipes.data.Concrete.EfCore;
 
@@ -14,28 +15,31 @@ namespace SalihRecipes.data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.16");
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.16")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("SalihRecipes.entity.Author", b =>
                 {
                     b.Property<int>("AuthorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AuthorAbout")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AuthorFullName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AuthorImage")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AuthorId");
 
@@ -45,10 +49,10 @@ namespace SalihRecipes.data.Migrations
             modelBuilder.Entity("SalihRecipes.entity.AuthorFoods", b =>
                 {
                     b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("FoodId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("AuthorId", "FoodId");
 
@@ -61,45 +65,91 @@ namespace SalihRecipes.data.Migrations
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryImage")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryImage = "unlumamuller.jpg",
+                            CategoryName = "Unlu Mamüller",
+                            Url = "unlu-mamuller"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryImage = "corbalar.jpg",
+                            CategoryName = "Çorbalar",
+                            Url = "corba"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryImage = "tatlilar.jpg",
+                            CategoryName = "Tatlılar",
+                            Url = "tatlilar"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryImage = "Etliyemekler.jpg",
+                            CategoryName = "Etli Yemekler",
+                            Url = "etli-yemekler"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryImage = "balık-yemek-kategori.jpg",
+                            CategoryName = "Balık Yemekleri",
+                            Url = "balik-yemekleri"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryImage = "asya-yemekleri.jpg",
+                            CategoryName = "Asya Yemekleri",
+                            Url = "asya-yemekleri"
+                        });
                 });
 
             modelBuilder.Entity("SalihRecipes.entity.Contact", b =>
                 {
                     b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("ContactDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ContactMail")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactMessage")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("ContactStatus")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("ContactSubject")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactUserName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactId");
 
@@ -110,53 +160,255 @@ namespace SalihRecipes.data.Migrations
                 {
                     b.Property<int>("FoodId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("FoodImage")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FoodMaterial")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FoodName")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<double?>("FoodPrice")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.Property<string>("FoodRecipe")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsApproved")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsHome")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsSlider")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FoodId");
 
                     b.ToTable("Foods");
+
+                    b.HasData(
+                        new
+                        {
+                            FoodId = 1,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "zeytinli_pogaca-slider.jpg",
+                            FoodMaterial = "a,b,c",
+                            FoodName = "Zeytinli Poğaca",
+                            FoodPrice = 7.0,
+                            FoodRecipe = "zeytin,hamur",
+                            IsApproved = true,
+                            IsHome = true,
+                            IsSlider = true,
+                            Url = "zeytinli-pogaca"
+                        },
+                        new
+                        {
+                            FoodId = 2,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "ezogelin-corbasi-tarifi.jpg",
+                            FoodMaterial = "ezogelinnnnnnnn",
+                            FoodName = "Ezogelin Çorbası",
+                            FoodPrice = 20.0,
+                            FoodRecipe = "ezogelin corbası",
+                            IsApproved = true,
+                            IsHome = true,
+                            IsSlider = true,
+                            Url = "ezogelin-corbasi"
+                        },
+                        new
+                        {
+                            FoodId = 3,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "mercimek_corba.jpg",
+                            FoodMaterial = "mercimejjjjj",
+                            FoodName = "Mercimek Çorbası",
+                            FoodPrice = 12.0,
+                            FoodRecipe = "mercimekkkk",
+                            IsApproved = true,
+                            IsHome = false,
+                            IsSlider = false,
+                            Url = "mercimek-corbasi"
+                        },
+                        new
+                        {
+                            FoodId = 4,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "kuru-baklava.jpeg",
+                            FoodMaterial = "baklavassdas",
+                            FoodName = "Kuru Baklava",
+                            FoodPrice = 21.0,
+                            FoodRecipe = "baklavaaa",
+                            IsApproved = true,
+                            IsHome = true,
+                            IsSlider = true,
+                            Url = "kuru-baklava"
+                        },
+                        new
+                        {
+                            FoodId = 5,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "kasarlipogaca.jpg",
+                            FoodMaterial = "kaşarrrrr",
+                            FoodName = "Kaşarlı Poğaça",
+                            FoodPrice = 5.0,
+                            FoodRecipe = "kaşarlıııı",
+                            IsApproved = true,
+                            IsHome = true,
+                            IsSlider = false,
+                            Url = "kasarli-pogaca"
+                        },
+                        new
+                        {
+                            FoodId = 6,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "mantar-corba.jpg",
+                            FoodMaterial = "mantarrrrr",
+                            FoodName = "Mantar Çorbası",
+                            FoodPrice = 10.0,
+                            FoodRecipe = "mantarrrrrrr",
+                            IsApproved = true,
+                            IsHome = false,
+                            IsSlider = false,
+                            Url = "mantar-corbasi"
+                        },
+                        new
+                        {
+                            FoodId = 7,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "cag-kebabi.jpg",
+                            FoodMaterial = "et,domates,sebze",
+                            FoodName = "Cağ Kebabı",
+                            FoodPrice = 46.0,
+                            FoodRecipe = "cag kebabı",
+                            IsApproved = true,
+                            IsHome = false,
+                            IsSlider = false,
+                            Url = "cag-kebabi"
+                        },
+                        new
+                        {
+                            FoodId = 8,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "uskumru-pilaki.jpeg",
+                            FoodMaterial = "uskumruuuu",
+                            FoodName = "Uskumru Pilaki",
+                            FoodPrice = 47.0,
+                            FoodRecipe = "uskumru pilaki",
+                            IsApproved = true,
+                            IsHome = false,
+                            IsSlider = false,
+                            Url = "uskumru-pilaki"
+                        },
+                        new
+                        {
+                            FoodId = 9,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "firinda-cinekop.jpg",
+                            FoodMaterial = "çinekopp",
+                            FoodName = "Fırında Çinekop",
+                            FoodPrice = 36.0,
+                            FoodRecipe = "fırınada çinekop",
+                            IsApproved = true,
+                            IsHome = false,
+                            IsSlider = false,
+                            Url = "firinda-cinekop"
+                        },
+                        new
+                        {
+                            FoodId = 10,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FoodImage = "sütlac.jpg",
+                            FoodMaterial = "a,b,c",
+                            FoodName = "Sütlaç",
+                            FoodPrice = 21.0,
+                            FoodRecipe = "sütlacccsç",
+                            IsApproved = true,
+                            IsHome = false,
+                            IsSlider = false,
+                            Url = "sütlac"
+                        });
                 });
 
             modelBuilder.Entity("SalihRecipes.entity.FoodCategory", b =>
                 {
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("FoodId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("CategoryId", "FoodId");
 
                     b.HasIndex("FoodId");
 
                     b.ToTable("FoodCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            FoodId = 1
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            FoodId = 2
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            FoodId = 3
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            FoodId = 4
+                        },
+                        new
+                        {
+                            CategoryId = 1,
+                            FoodId = 5
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            FoodId = 6
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            FoodId = 7
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            FoodId = 8
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            FoodId = 9
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            FoodId = 10
+                        });
                 });
 
             modelBuilder.Entity("SalihRecipes.entity.AuthorFoods", b =>

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace SalihRecipes.webui.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private IFoodService _foodService;
@@ -42,28 +42,58 @@ namespace SalihRecipes.webui.Controllers
             return View(_userManager.Users);
         }
 
-        //public async Task<IActionResult> UserEdit(string id)
-        //{
-        //    var user = await _userManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        var selectedRoles = await _userManager.GetRolesAsync(user);
-        //        var roles = _roleManager.Roles.Select(i => i.Name);
-        //        ViewBag.Roles = roles;
-        //        return View(new UserDetailsModel()
-        //        {
-        //            UserId = user.Id,
-        //            FirstName = user.FirstName,
-        //            LastName = user.LastName,
-        //            UserName = user.UserName,
-        //            Email = user.Email,
-        //            EmailConfirmed = user.EmailConfirmed,
-        //            SelectedRoles = selectedRoles
-        //        });
-        //    }
-        //    return Redirect("~/admin/user/list");
-        //}
+        public async Task<IActionResult> UserEdit(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                var selectedRoles = await _userManager.GetRolesAsync(user);
+                var roles = _roleManager.Roles.Select(i => i.Name);
+                ViewBag.Roles = roles;
+                return View(new UserDetailsModel()
+                {
+                    UserId = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    EmailConfirmed = user.EmailConfirmed,
+                    SelectedRoles = selectedRoles
+                });
+            }
+            return Redirect("~/admin/user/list");
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> UserEdit(UserDetailsModel model, string[] selectedRoles)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(model.UserId);
+                if (user!=null)
+                {
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
+                    user.EmailConfirmed = model.EmailConfirmed;
+
+                    var result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        var userRoles = await _userManager.GetRolesAsync(user);
+                        selectedRoles = selectedRoles ?? new string[] { };
+                        await _userManager.AddToRolesAsync(user,selectedRoles.Except(userRoles).ToArray<string>());//selectedroles den daha önce veritabanında olanları çıkarıyoruz
+                        await _userManager.RemoveFromRolesAsync(user,userRoles.Except(selectedRoles).ToArray<string>());
+                        //veritabanında olan roller içerisinden seçilenleri çıkarıyoruz
+
+                        return Redirect("/admin/user/list");
+                    }
+                }
+                return View(model);
+            }
+            return View(model);
+        }
         public IActionResult RoleList()
         {
             return View(_roleManager.Roles);
@@ -232,7 +262,7 @@ namespace SalihRecipes.webui.Controllers
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);  
         }
-        [AllowAnonymous]
+        
         public IActionResult FoodEdit(int? id)
         {
             if (id == null)
@@ -264,7 +294,7 @@ namespace SalihRecipes.webui.Controllers
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);
         }
-        [AllowAnonymous]
+       
         [HttpPost]
         public async Task<IActionResult> FoodEdit(FoodModel model, int[] categoryIds, IFormFile file)
         {
