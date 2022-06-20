@@ -156,16 +156,18 @@ namespace SalihRecipes.webui
                    );
 
                 endpoints.MapControllerRoute(
+                    name: "adminrolecreate",
+                    pattern: "admin/role/create",
+                    defaults: new { controller = "Admin", action = "RoleCreate" }
+                    );
+
+                endpoints.MapControllerRoute(
                    name: "adminroleedit",
                    pattern: "admin/role/{id}",
                    defaults: new { controller = "Admin", action = "RoleEdit" }
                    );
 
-                endpoints.MapControllerRoute(
-                    name: "adminrolecreate",
-                    pattern: "admin/role/create",
-                    defaults: new { controller = "Admin", action = "RoleCreate" }
-                    );
+
 
                 endpoints.MapControllerRoute(
                    name: "adminfoods",

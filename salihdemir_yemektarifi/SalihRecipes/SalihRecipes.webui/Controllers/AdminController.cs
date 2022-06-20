@@ -116,7 +116,7 @@ namespace SalihRecipes.webui.Controllers
                     return RedirectToAction("RoleList");
                 }
 
-                //Geri kalan kısmına yarın devam edeceğiz.
+  
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);

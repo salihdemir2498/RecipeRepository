@@ -104,12 +104,20 @@ namespace SalihRecipes.webui.Controllers
                     userId = user.Id,
                     token = code
                 });
+                
                 //mail gönderme işlemleri
                 await _emailSender.SendEmailAsync(model.Email, "SalihRecipes Hesap Onaylama", $"Lütfen email hesabınızı onaylamak için <a href='https://localhost:5001{url}'>tıklayınız.</a>");
+ 
                 return RedirectToAction("Login", "Account");
+   
             }
-
-            CreateMessage("Bir sorun oluştu, lütfen tekrar deneyiniz", "danger");
+            TempData.Put("message", new AlertMessage()
+            {
+                Title = "Bir Sorun ile Karşılandı",
+                Message = "Bir sorun oluştu, lütfen tekrar deneyiniz",
+                AlertType = "danger"
+            });
+            //CreateMessage("Bir sorun oluştu, lütfen tekrar deneyiniz", "danger");
             return View(model);
         }
 

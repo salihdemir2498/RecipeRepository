@@ -7674,7 +7674,6 @@
       "Microsoft.EntityFrameworkCore >= 5.0.16",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.16",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.16",
-      "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.16",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.16",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
       "Newtonsoft.Json >= 13.0.1",
@@ -7751,10 +7750,6 @@
             "version": "[5.0.16, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "[5.0.16, )"
-          },
-          "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
             "version": "[5.0.16, )"
           },
