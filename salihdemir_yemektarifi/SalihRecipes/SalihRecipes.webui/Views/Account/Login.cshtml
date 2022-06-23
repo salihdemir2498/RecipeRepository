@@ -54,26 +54,34 @@
                     <div class="group">
                         <label asp-for="FirstName" class="label"></label>
                         <input asp-for="FirstName" type="text" class="input">
+                        <span asp-validation-for="FirstName"></span>    
                     </div>
                     <div class="group">
                         <label asp-for="LastName" class="label"></label>
                         <input asp-for="LastName" class="input">
+                        <span asp-validation-for="LastName"></span>    
+
                     </div>
                     <div class="group">
                         <label asp-for="UserName" class="label"></label>
                         <input asp-for="UserName" class="input">
+                        <span asp-validation-for="UserName"></span>    
+
                     </div>
                     <div class="group">
                         <label asp-for="Email" class="label"></label>
                         <input asp-for="Email" type="text" class="input">
+                         <span asp-validation-for="Email"></span>  
                     </div>
                     <div class="group">
                         <label asp-for="Password" class="label"></label>
                         <input asp-for="Password" type="password" class="input" data-type="password">
+                         <span asp-validation-for="Password"></span>  
                     </div>
                     <div class="group">
                         <label asp-for="RePassword" class="label"></label>
                         <input asp-for="RePassword" type="password" class="input" data-type="password">
+                         <span asp-validation-for="RePassword"></span>  
                     </div>
                     <div class="group">
                         <input type="submit" class="button" value="Sign Up">
@@ -86,7 +94,7 @@
 </div>
 
 
-@section scripts
+@section Scripts
 {
    
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

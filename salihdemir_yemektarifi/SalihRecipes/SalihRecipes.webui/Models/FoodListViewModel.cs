@@ -24,6 +24,5 @@ namespace SalihRecipes.webui.Models
         public PageInfo PageInfo { get; set; }
         public List<Food> Foods { get; set; }
         public List<Category> Categories { get; set; }
-        public List<Author> Authors { get; set; }
     }
 }

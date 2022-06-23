@@ -21,22 +21,6 @@ namespace SalihRecipes.webui.Controllers
 
         public IActionResult Index()
         {
-            //var entity = _contactManager.ContactAdd(c);
-            //if (entity == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var model = new ContactModel()
-            //{
-            //    ContactId = entity.ContactId,
-            //    ContactUserName = entity.ContactUserName,
-            //    ContactMail = entity.ContactMail,
-            //    ContactMessage = entity.ContactMessage,
-            //    ContactSubject = entity.ContactSubject,
-            //    ContactStatus = entity.ContactStatus,
-            //    ContactDate = entity.ContactDate,
-            //}; //veritabanından aldığımız bilgiyi productmodele aktardık
             return View();
         }
 

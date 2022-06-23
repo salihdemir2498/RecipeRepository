@@ -15,8 +15,8 @@ namespace SalihRecipes.data.Configurations
         {
             builder.HasKey(m=>m.FoodId);
             builder.Property(m => m.FoodName).IsRequired().HasMaxLength(100);
-            builder.Property(m => m.DateAdded).HasDefaultValueSql("getdate()"); //mssql
-                                                                                //builder.Property(m => m.DateAdded).HasDefaultValueSql("date('now')"); //sqlite için
+            /*builder.Property(m => m.DateAdded).HasDefaultValueSql("getdate()");*/ //mssql
+            builder.Property(m => m.DateAdded).HasDefaultValueSql("date('now')"); //sqlite için
 
         }
     }

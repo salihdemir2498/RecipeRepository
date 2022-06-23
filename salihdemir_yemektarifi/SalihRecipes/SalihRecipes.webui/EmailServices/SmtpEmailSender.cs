@@ -16,11 +16,11 @@ namespace SalihRecipes.webui.EmailServices
         private string _password;
         public SmtpEmailSender(string host, int port, bool enableSSL, string userName, string password)
         {
-            _host = host;
-            _port = port;
-            _enableSSL = enableSSL;
-            _userName = userName;
-            _password = password;
+            this._host = host;
+            this._port = port;
+            this._enableSSL = enableSSL;
+            this._userName = userName;
+            this._password = password;
         }
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {

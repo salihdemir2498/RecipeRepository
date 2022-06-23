@@ -20,10 +20,9 @@ namespace SalihRecipes.business.Abstract
         List<Food> GetFoodsByCategory(string name, int page, int pageSize);
         Food GetByIdWithCategories(int id);
         bool Update(Food entity, int[] categoryIds);
-        void Create(Food entity, int[] categoryIds, int authorId);
+        void Create(Food entity, int[] categoryIds/*, int userId*/);
         int GetCountByCategory(string category);
         Food GetFoodDetails(string url);
-        Food GetFoodDetails2(string url);
         List<Food> GetSearchResult(string searchString);
         public Food GetSingle(Expression<Func<Food, bool>> filter);
 

@@ -14,10 +14,10 @@ namespace SalihRecipes.data.Abstract
         Food GetByIdWithCategories(int id);
         void Update(Food entity, int[] categoryIds);
         int GetCountByCategory(string category);
-        void Create(Food entity, int[] categoryIds, int authorId);
+        void Create(Food entity, int[] categoryIds/*, int userId*/);
         List<Food> GetFoodsByCategory(string name, int page, int pageSize); //category ismini gönderelim ona göre bize foodları göstersin
         Food GetFoodDetails(string url);
-        Food GetFoodDetails2(string url);
+        //Food GetFoodDetails2(string url);
         List<Food> GetSearchResult(string searchString);
 
     }

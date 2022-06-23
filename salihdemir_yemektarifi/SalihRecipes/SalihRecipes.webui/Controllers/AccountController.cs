@@ -95,7 +95,7 @@ namespace SalihRecipes.webui.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)//Create işlemi başarılıysa
             {
-                //await _userManager.AddToRoleAsync(user,"customer"); //üyelik oluşturulduğu zaman kullanıcı varsayılan olarak bir customer rolüne ait yapmak istiyosak 
+                await _userManager.AddToRoleAsync(user,"customer"); //üyelik oluşturulduğu zaman kullanıcı varsayılan olarak bir customer rolüne ait yapmak istiyosak 
 
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
@@ -108,16 +108,11 @@ namespace SalihRecipes.webui.Controllers
                 //mail gönderme işlemleri
                 await _emailSender.SendEmailAsync(model.Email, "SalihRecipes Hesap Onaylama", $"Lütfen email hesabınızı onaylamak için <a href='https://localhost:5001{url}'>tıklayınız.</a>");
  
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Home");
    
             }
-            TempData.Put("message", new AlertMessage()
-            {
-                Title = "Bir Sorun ile Karşılandı",
-                Message = "Bir sorun oluştu, lütfen tekrar deneyiniz",
-                AlertType = "danger"
-            });
-            //CreateMessage("Bir sorun oluştu, lütfen tekrar deneyiniz", "danger");
+
+            CreateMessage("Bir sorun oluştu, lütfen tekrar deneyiniz", "danger");
             return View(model);
         }
 
@@ -125,6 +120,7 @@ namespace SalihRecipes.webui.Controllers
         {
             if (userId == null || token == null)
             {
+                CreateMessage("Geçersiz token","danger");
                 return View();
             }
 

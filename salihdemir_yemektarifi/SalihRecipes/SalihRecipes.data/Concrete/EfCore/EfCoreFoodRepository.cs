@@ -20,23 +20,23 @@ namespace SalihRecipes.data.Concrete.EfCore
         {
             get { return context as SalihRecipesContext; }
         }
-        public void Create(Food entity, int[] categoryIds, int authorIds)
+        public void Create(Food entity, int[] categoryIds)
         {
 
             SalihRecipesContext.Foods.Add(entity);
             //SalihRecipesContext.SaveChanges();
-                List<AuthorFoods> authorFoods = new List<AuthorFoods>();
-                authorFoods.Add(new AuthorFoods()
-                {
-                    AuthorId = authorIds,
-                    FoodId = entity.FoodId
-                });
+                //List<AuthorFoods> authorFoods = new List<AuthorFoods>();
+                //authorFoods.Add(new AuthorFoods()
+                //{
+                //    AuthorId = authorIds,
+                //    FoodId = entity.FoodId
+                //});
                 entity.FoodCategories = categoryIds.Select(catId => new FoodCategory()
                 {
                     FoodId = entity.FoodId,
                     CategoryId = catId
                 }).ToList();
-                entity.AuthorFoods = authorFoods;
+                //entity.AuthorFoods = authorFoods;
             //SalihRecipesContext.SaveChanges();
              
            
@@ -79,16 +79,7 @@ namespace SalihRecipes.data.Concrete.EfCore
             
         }
 
-        public Food GetFoodDetails2(string url)
-        {
-            
-                return SalihRecipesContext.Foods
-                               .Where(i => i.Url == url)
-                               .Include(i => i.AuthorFoods)
-                               .ThenInclude(i => i.Author)
-                               .FirstOrDefault();
-            
-        }
+
 
         public List<Food> GetFoodsByCategory(string name, int page, int pageSize)
         {

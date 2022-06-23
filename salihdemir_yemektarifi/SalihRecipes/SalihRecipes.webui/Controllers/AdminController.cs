@@ -24,16 +24,16 @@ namespace SalihRecipes.webui.Controllers
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
         private IContactService _contactService;
-        private IAuthorService _authorService;
 
-        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IContactService contactService, IAuthorService authorService)
+
+        public AdminController(IFoodService foodService, ICategoryService categoryService, RoleManager<IdentityRole> roleManager, UserManager<User> userManager, IContactService contactService)
         {
             _foodService = foodService;
             _categoryService = categoryService;
             _roleManager = roleManager;
             _userManager = userManager;
             _contactService = contactService;
-            _authorService = authorService;
+
         }
 
 
@@ -219,6 +219,7 @@ namespace SalihRecipes.webui.Controllers
                     {
                          file.CopyTo(stream);
                     }
+                var userId = _userManager.GetUserName(User);
                 
                 var entity = new Food()
                 {
@@ -229,12 +230,14 @@ namespace SalihRecipes.webui.Controllers
                     FoodRecipe=model.FoodRecipe,
                     FoodImage = model.FoodImage,
                     IsApproved = model.IsApproved,
-                    IsHome = model.IsHome
+                    IsHome = model.IsHome,
+                    UserId = userId
+                    
                 };
-                string userId = _userManager.GetUserId(User);
+                //string userId = _userManager.GetUserId(User);
 
-                var author= _authorService.GetSingle(i=>i.UserId==userId);
-                _foodService.Create(entity, categoryIds, author.AuthorId);
+                ViewBag.User= _userManager.GetUserAsync(User);
+                _foodService.Create(entity, categoryIds);
 
                  CreateMessage("Kayıt Eklendi", "success");
                     return RedirectToAction("FoodList");
@@ -288,8 +291,9 @@ namespace SalihRecipes.webui.Controllers
                 IsApproved = entity.IsApproved,
                 IsHome = entity.IsHome,
                 IsSlider=entity.IsSlider,
-                SelectedCategories = entity.FoodCategories.Select(i => i.Category).ToList() //seçilmiş kategori bilgilerini aldık
-            }; //veritabanından aldığımız bilgiyi productmodele aktardık
+                SelectedCategories = entity.FoodCategories.Select(i => i.Category).ToList(),
+                UserName=entity.UserId
+            }; 
 
             ViewBag.Categories = _categoryService.GetAll();
             return View(model);

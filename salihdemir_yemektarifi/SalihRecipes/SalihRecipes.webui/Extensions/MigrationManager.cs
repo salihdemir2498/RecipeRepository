@@ -24,7 +24,7 @@ namespace SalihRecipes.webui.Extensions
                     }
                     catch (System.Exception)
                     {
-                        //loglama
+                        
                         throw;
                     }
                 }
@@ -37,7 +37,7 @@ namespace SalihRecipes.webui.Extensions
                     }
                     catch (System.Exception)
                     {
-                        //loglama
+                        
                         throw;
                     }
                 }

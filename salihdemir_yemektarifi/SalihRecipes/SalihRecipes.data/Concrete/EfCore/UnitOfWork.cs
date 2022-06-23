@@ -15,7 +15,7 @@ namespace SalihRecipes.data.Concrete.EfCore
         {
             _context = context;
         }
-        private EfCoreAuthorRepository _authorRepository;
+
         private EfCoreCategoryRepository _categoryRepository;
         private EfCoreFoodRepository _foodRepository;
         private EfCoreContactRepository _contactRepository;
@@ -23,7 +23,7 @@ namespace SalihRecipes.data.Concrete.EfCore
 
         public ICategoryRepository Categories => _categoryRepository = _categoryRepository ?? new EfCoreCategoryRepository(_context);
 
-        public IAuthorRepository Authors => _authorRepository = _authorRepository ?? new EfCoreAuthorRepository(_context);
+       
 
         public IContactRepository Contacts => _contactRepository = _contactRepository ?? new EfCoreContactRepository(_context);
 

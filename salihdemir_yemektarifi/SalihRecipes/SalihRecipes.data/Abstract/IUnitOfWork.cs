@@ -10,7 +10,6 @@ namespace SalihRecipes.data.Abstract
     {
         IFoodRepository Foods { get; }
         ICategoryRepository Categories { get; }
-        IAuthorRepository Authors { get; }
         IContactRepository Contacts { get; }
         void Save();
     }

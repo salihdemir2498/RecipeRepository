@@ -115,9 +115,9 @@ namespace SalihRecipes.business.Concrete
             return _unitOfWork.Foods.GetFoodsByCategory(name, page, pageSize);
         }
 
-        public void Create(Food entity, int[] categoryIds, int authorIds)
+        public void Create(Food entity, int[] categoryIds/*, int userId*/)
         {
-            _unitOfWork.Foods.Create(entity,categoryIds, authorIds);
+            _unitOfWork.Foods.Create(entity,categoryIds/*, userId*/);
             _unitOfWork.Save();
         }
 
@@ -126,10 +126,10 @@ namespace SalihRecipes.business.Concrete
             return _unitOfWork.Foods.GetFoodDetails(url);
         }
 
-        public Food GetFoodDetails2(string url)
-        {
-            return _unitOfWork.Foods.GetFoodDetails2(url);
-        }
+        //public Food GetFoodDetails2(string url)
+        //{
+        //    return _unitOfWork.Foods.GetFoodDetails2(url);
+        //}
 
         public List<Food> GetSearchResult(string searchString)
         {

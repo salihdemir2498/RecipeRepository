@@ -24,6 +24,7 @@ namespace SalihRecipes.webui
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,11 +35,11 @@ namespace SalihRecipes.webui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
-            services.AddDbContext<SalihRecipesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
+            //services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
+            //services.AddDbContext<SalihRecipesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MsSqlConnection")));
 
-            //services.AddDbContext<ApplicationContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
-            //services.AddDbContext<SalihRecipesContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
+            services.AddDbContext<SalihRecipesContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqliteConnection")));
 
 
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
@@ -96,7 +97,7 @@ namespace SalihRecipes.webui
             services.AddScoped<IFoodService, FoodManager>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IContactService, ContactManager>();
-            services.AddScoped<IAuthorService, AuthorManager>();
+
 
             services.AddControllersWithViews();
           
@@ -218,7 +219,7 @@ namespace SalihRecipes.webui
 
                 endpoints.MapControllerRoute(
                     name: "foods",
-                    pattern: "foods/{category?}",  //category eklemezsek direk products açýlýr category optional
+                    pattern: "foods/{category?}",  
                     defaults: new { controller = "Food", action = "foodlist" }
                     );
                

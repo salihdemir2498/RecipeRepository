@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SalihRecipes.business.Abstract;
 using SalihRecipes.entity;
+using SalihRecipes.webui.Identity;
 using SalihRecipes.webui.Models;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,13 @@ namespace SalihRecipes.webui.Controllers
     {
         private IFoodService _foodService;
         private ICategoryService _categorydService;
-        private IAuthorService _authorService;
 
-        public FoodController(IFoodService foodService, ICategoryService categorydService, IAuthorService authorService)
+        private UserManager<User> _userManager;
+        public FoodController(IFoodService foodService, ICategoryService categorydService, UserManager<User> userManager)
         {
             _foodService = foodService;
             _categorydService = categorydService;
-            _authorService = authorService;
+            _userManager = userManager;
         }
 
         public IActionResult FoodList(string category, int page = 1)
@@ -42,24 +44,25 @@ namespace SalihRecipes.webui.Controllers
             return View(foodListViewmodel);
         }
 
-        public IActionResult FoodDetails(string url)
+        public async Task<IActionResult> FoodDetails(string url)
         {
             if (url == null)
             {
                 return NotFound();
             }
             Food food = _foodService.GetFoodDetails(url);
-           Food food2 = _foodService.GetFoodDetails2(url);
-            //int authorID = food2.AuthorFoods.Find(i => i.FoodId == food.FoodId).AuthorId;
+
             if (food == null)
             {
                 return NotFound();
             }
+            var user = await _userManager.GetUserAsync(User);
+
             return View(new FoodDetailModel
             {
                 Food = food,
-                Categories = food.FoodCategories.Select(i => i.Category).ToList()
-                //Author = _authorService.GetById(authorID)
+                Categories = food.FoodCategories.Select(i => i.Category).ToList(),
+                UserName = food.UserId
             }) ;
            
         }

@@ -19,7 +19,7 @@ namespace SalihRecipes.webui.Models
         public string Password { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password")]//RePassword alanı, Password alanı ile AYNI OLMALI
+        [Compare("Password")]
         public string RePassword { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]

@@ -21,6 +21,7 @@ namespace SalihRecipes.entity
         public bool IsSlider { get; set; }
         public DateTime DateAdded { get; set; }
         public List<FoodCategory> FoodCategories { get; set; }
-        public List<AuthorFoods> AuthorFoods { get; set; }
+        public string UserId { get; set; }
+
     }
 }
