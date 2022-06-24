@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SalihRecipes.data.Concrete.EfCore;
+using SalihRecipes.entity;
 using SalihRecipes.webui.EmailServices;
 using SalihRecipes.webui.Extensions;
 using SalihRecipes.webui.Identity;
@@ -34,6 +36,8 @@ namespace SalihRecipes.webui.Controllers
         {
             return View();
         }
+      
+    
 
         public IActionResult Login(RegisterModel model=null)
         {

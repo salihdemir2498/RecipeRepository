@@ -205,3 +205,4 @@ C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\Salih
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\SalihRecipes.webui.csproj.CopyComplete
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\SalihRecipes.webui.genruntimeconfig.cache
 C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\ref\SalihRecipes.webui.dll
+C:\Users\user\Desktop\RecipeRepository\salihdemir_yemektarifi\SalihRecipes\SalihRecipes.webui\obj\Debug\net5.0\Razor\Views\Food\Manage.cshtml.g.cs

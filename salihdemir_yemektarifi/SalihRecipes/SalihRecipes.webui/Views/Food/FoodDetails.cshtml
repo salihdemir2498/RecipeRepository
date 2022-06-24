@@ -1,11 +1,12 @@
 ﻿@model FoodDetailModel
 
+
 @if(Model.Categories.Count == 1)
 {
     @foreach (var item in Model.Categories)
 {
 <h3 class="d-flex">
-    <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">Tüm Kategoriler </a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span>
+    <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark a">Tüm Kategoriler </a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span>
     <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">@item.CategoryName</a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span> <p style="font-size: 15px; color: #9B9B9B !important;">@Model.Food.FoodName</p>
 </h3>
     }
@@ -15,13 +16,13 @@ else
          @foreach (var item in Model.Categories)
 {
 <h3 class="d-flex">
-    <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">Tüm Kategoriler </a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span>
-    <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">@item.CategoryName</a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span> <p style="font-size: 15px; color: #9B9B9B !important;">@Model.Food.FoodName</p>
+    <a href="/category/index" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark ">Tüm Kategoriler </a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span>
+    <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" style="text-decoration: none; font-size: 15px; color: #9B9B9B !important; " class="text-dark">@item.CategoryName</a><span style="font-size: 15px; color: #9B9B9B !important;"> &gt; </span> <p style="font-size: 15px; color: #9B9B9B !important;" >@Model.Food.FoodName</p>
         </h3>
         break;
     }
 }
-   
+
 
 
 
@@ -32,35 +33,19 @@ else
         <div class="col-md-8">
 
             <h5 class="mb-3">@Model.Food.FoodName</h5> <hr />
-            <div class="d-flex flex-column align-items-lg-start">
+            <div class="d-flex align-items-lg-start">
                 @foreach (var item in Model.Categories)
                 {
-                    if (Model.Categories.Count == 1)
-                {
-                     <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" class="btn btn-link p-0 mb-3"><span class="text-dark">Category Name: </span>@item.CategoryName</a>
-                }
-                    else
-                {
-                    <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" class="btn btn-link p-0 mb-3"><span class="text-dark">Category Name: </span>
                     
-                        @for (int i = 0; i < Model.Categories.Count-1; i++)
-                    {
-                            @item.CategoryName
-                            break;
-
-                    }
-                      </a>
-                         
+                     <a asp-controller="Food" asp-action="FoodList" asp-route-category="@item.Url" class="btn btn-link text-info p-0 mb-3 me-2">@item.CategoryName</a>
+                
                 
                 }
-                   
+              </div>
+            <a  asp-controller="Food" asp-action="Manage" asp-route-username="@Model.UserName" class="btn btn-link p-0 mb-3"><span class="text-dark"><img src="~/images/author-icon-21.jpg" width="30" height="35" alt="Alternate Text" /></span>@Model.UserName</a>
 
-                }
-              
-            <a @*asp-controller="Author" asp-action="AuthorList" asp-route-id="@Model.Author.AuthorId"*@ class="btn btn-link p-0 mb-3"><span class="text-dark"><img src="~/images/author-icon-21.jpg" width="30" height="35" alt="Alternate Text" /></span>@Model.UserName</a>
-
-                
-            </div>
+               
+            
             
 
 

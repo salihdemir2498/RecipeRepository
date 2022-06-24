@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SalihRecipes.business.Abstract;
+using SalihRecipes.data.Concrete.EfCore;
 using SalihRecipes.entity;
 using SalihRecipes.webui.Identity;
 using SalihRecipes.webui.Models;
@@ -65,6 +66,13 @@ namespace SalihRecipes.webui.Controllers
                 UserName = food.UserId
             }) ;
            
+        }
+
+        public IActionResult Manage(string username)
+        {
+            var user = _userManager.Users.Where(i => i.UserName == username);
+
+            return View(user);
         }
 
         public IActionResult Search(string q)
